@@ -44,21 +44,24 @@ Returns horizontal and equatorial solar coordinates.
 
     var sunpos = A.get.sunPosition(new Date, lat, lon)
 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    // 
-    //  Returns an object with:
-    //  {
-    //      azimuthInRads: Azimuth in radians
-    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitudeInRads: Altitude in radians
-    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
-    //      ascension: Right ascension in radians
-    //      declination: Declination in radians
-    //  }
+Takes four arguments:
+
+    object: A Javascript date object.
+    integer: Latitude
+    integer: Longitude
+    integer: Optional height above sea level, in meters
+
+
+Returns an object containing:
+
+    {
+        azimuthInRads: Azimuth in radians
+        azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+        altitudeInRads: Altitude in radians
+        altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+        ascension: Right ascension in radians
+        declination: Declination in radians
+    }
 
 ---
 
@@ -71,23 +74,26 @@ Returns horizontal and equatorial lunar coordinates, along with delta and parala
 
     var moonpos = A.get.moonPosition(new Date, lat, lon)
 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //    {
-    //      azimuthInRads: Azimuth in radians
-    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitudeInRads: Altitude in radians
-    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
-    //      ascension: Right ascension in radians
-    //      declination: Declination in radians
-    //      delta: Distance between centers of the Earth and Moon, in km
-    //      paralacticAngle: In radians 
-    //    }
+Takes four arguments:
+
+    object: A Javascript date object.
+    integer: Latitude
+    integer: Longitude
+    integer: Optional height above sea level, in meters
+
+Returns an object with:
+
+    {
+        azimuthInRads: Azimuth in radians
+        azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+        altitudeInRads: Altitude in radians
+        altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+        ascension: Right ascension in radians
+        declination: Declination in radians
+        delta: Distance between centers of the Earth and Moon, in km
+        paralacticAngle: In radians 
+    }
+
 
 ---
 
@@ -100,17 +106,18 @@ Distance of the moon in either miles or kilometers.
 
     var dist = A.get.lunarDistance(new Date, lat, lon)
 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      number: options number of decimal places to show
-    //      bool: Whether to format the number with commas
-    //
-    //  Returns an object with:
-    //  {
-    //      kilometers: Distance to the moon in kilometers
-    //      miles: Distance to the moon in miles
-    //  }
+Takes three arguments:
 
+    object: A Javascript date object.
+    number: options number of decimal places to show
+    bool: Whether to format the number with commas
+
+Returns an object with:
+
+    {
+        kilometers: Distance to the moon in kilometers
+        miles: Distance to the moon in miles
+    }
 
 
 ---
@@ -125,21 +132,32 @@ Moon phase and illumination percentage.
 
     var illum = A.get.moonIllumination(new Date, lat, lon)
 
-    //  Returns an object with:
-    //  {
-    //      phaseAngle: The illuminated fraction of the moon in radians
-    //      illumination: The percentage of the illuminated area of the disk
-    //      phase: moon phase as a number between 0 and 1. See below for meaning:
-    //  }
-    //
-    //      0.0 = New Moon
-    //      0.125 = Waxing Crescent
-    //      0.25 = First Quarter
-    //      0.375 = Waxing Gibbous
-    //      0.5	= Full Moon
-    //      62.5 = Waning Gibbous
-    //      0.75 = Last Quarter
-    //      0.875 = Waning Crescent
+
+Takes the following arguments:
+
+    object: A Javascript date object.
+    integer: Latitude
+    integer: Longitude
+    integer: Optional height above sea level, in meters
+
+Returns an object containing:
+
+    {
+        phaseAngle: The illuminated fraction of the moon in radians
+        illumination: The percentage of the illuminated area of the disk
+        phase: moon phase as a number between 0 and 1. See below for meaning:
+    }
+
+**Moon phases**
+
+    0.0 = New Moon
+    0.125 = Waxing Crescent
+    0.25 = First Quarter
+    0.375 = Waxing Gibbous
+    0.5	= Full Moon
+    62.5 = Waning Gibbous
+    0.75 = Last Quarter
+    0.875 = Waning Crescent
 
 ---
 
@@ -152,18 +170,20 @@ Returns solar sunrise, sunset, and transit times.
 
     var times = A.get.sunTimes(new Date, lat, lon)
 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      sunrise: Sunrise time in Unix
-    //      transit: The length of time the sun is above the horizon, in seconds
-    //      sunset: Sunset time in Unix
-    //  }
+Takes the following arguments:
+
+    object: A Javascript date object.
+    integer: Latitude
+    integer: Longitude
+    integer: Optional height above sea level, in meters
+
+Returns an object containing:
+
+    {
+        sunrise: Sunrise time in Unix
+        transit: The length of time the sun is above the horizon, in seconds
+        sunset: Sunset time in Unix
+    }
 
 
 ---
@@ -177,28 +197,30 @@ Returns a variety of solar times.
 
     var times = A.get.sunTimesAll(new Date, lat, lon)
 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      dawn: date object
-    //      dusk: date object
-    //      goldenHourAmEnd: date object
-    //      goldenHourAmStart: date object
-    //      goldenHourPmEnd: date object
-    //      goldenHourPmStart: date object
-    //      nadir: date object
-    //      solarNoon: date object
-    //      sunrise: date object
-    //      sunset: date object
-    //      transit: date object
-    //      dayLength: String in "HH:MM:SS"
-    //      nightLength: String in "HH:MM:SS"
-    //  }
+Takes four arguments:
+
+    object: A Javascript date object.
+    integer: Latitude
+    integer: Longitude
+    integer: Optional height above sea level, in meters
+
+Returns an object containing:
+
+    {
+        dawn: date object
+        dusk: date object
+        goldenHourAmEnd: date object
+        goldenHourAmStart: date object
+        goldenHourPmEnd: date object
+        goldenHourPmStart: date object
+        nadir: date object
+        solarNoon: date object
+        sunrise: date object
+        sunset: date object
+        transit: date object
+        dayLength: String in "HH:MM:SS"
+        nightLength: String in "HH:MM:SS"
+    }
 
 ---
 
@@ -211,18 +233,20 @@ Moonrise, moonset, and transit times.
 
     var times = A.get.moonTimes(new Date, lat, lon)
 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      moonrise: Sunrise time in Unix
-    //      transit: The length of time the sun is above the horizon, in seconds
-    //      moonset: Sunset time in Unix
-    //  }
+Takes four arguments:
+
+    object: A Javascript date object.
+    integer: Latitude
+    integer: Longitude
+    integer: Optional height above sea level, in meters
+
+Returns an object containing:
+
+    {
+        moonrise: Sunrise time in Unix
+        transit: The length of time the sun is above the horizon, in seconds
+        moonset: Sunset time in Unix
+    }
 
 ---
 
@@ -232,10 +256,11 @@ Longest day of the year - when the sun is at its most northerly excursion.
 
     var s = A.get.summerSolstice(2021)
 
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
+Takes one argument:
+
+    Integer: The year
+
+Returns a Javascript date object 
 
 ----
 
@@ -246,10 +271,11 @@ Shortest day of the year - when the sun is at its most southerly excursion.
 
     var s = A.get.winterSolstice(2021)
 
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
+Takes one argument:
+
+    Integer: The year
+
+Returns a Javascript date object 
 
 ----
 
@@ -260,10 +286,11 @@ Spring equinox in March. On the equinox, the day and night are the same length. 
 
     var s = A.get.vernalEquinox(2021)
 
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
+Takes one argument:
+
+    Integer: The year
+
+Returns a Javascript date object 
 
 ----
 
@@ -273,10 +300,11 @@ Fall Equinox in September. On the equinox, the day and night are the same length
 
     var s = A.get.fallEquinox(2021)
 
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
+Takes one argument:
+
+    Integer: The year
+
+Returns a Javascript date object 
 
 ----
 
@@ -286,11 +314,12 @@ Converts rads to degrees, and optionally maintains positive or negative value.
 
     A.Util.radiansToDegrees(rads, false)
 
-    //  Takes the following arguments:
-    //      Integer: The value in radians you wish to convert
-    //      bool: Whether to preserve the sign. i.e. negative radians returns negative degrees
-    //
-    //  Returns an integer in degrees
+Takes two arguments:
+
+    Integer: The value in radians you wish to convert
+    bool: Whether to preserve the sign. i.e. negative radians returns negative degrees
+
+Returns an integer in degrees
 
 ---
 
@@ -298,27 +327,33 @@ Converts rads to degrees, and optionally maintains positive or negative value.
 
 In other words, 60˚ becomes 240˚. Or 120˚ becomes 300˚.
 
-    A.Util.invertDegree(180)
+    var inv = A.Util.invertDegree(180)
 
-    //  Takes one argument:
-    //      Integer: The value in degrees you wish to flip
-    //
-    //  Returns an integer in degrees
+Takes one argument:
+
+    Integer: The value in degrees you wish to flip
+
+Returns an integer in degrees
 
 ---
 
 ### Number with Commas
 
-    A.Util.numberWithCommas(456254256)
+    var n = A.Util.numberWithCommas(456254256)
 
-    // Becomes 456,254,256
+ Becomes 456,254,256
 
-    //  Takes one argument:
-    //      Integer: The value in degrees you wish to format
-    //
-    //  Returns a number
+Takes one argument:
+
+    Integer: The value in degrees you wish to format
+
+Returns a number
 
 ---
+
+
+
+
 
 
 ## License
