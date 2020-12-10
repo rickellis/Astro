@@ -101,9 +101,9 @@ Distance of the moon in either miles or kilometers.
     var lon = 34.05361
     var lat = -118.24550
 
-    var dist = A.get.lunarDistance(new Date, lat, lon)
+    var dist = A.get.lunarDistance(new Date, 2, true)
 
-Takes three arguments:
+Takes the following arguments:
 
     object: A Javascript date object.
     number: options number of decimal places to show
@@ -115,7 +115,6 @@ Returns an object with:
         kilometers: Distance to the moon in kilometers
         miles: Distance to the moon in miles
     }
-
 
 ---
 
