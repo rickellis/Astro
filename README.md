@@ -4,29 +4,29 @@ Solar and Lunar Astronomical Calculation Library written in Javascript
 
 Astro is a fork of Fabio Soldati's excellent [MeeusJS](https://github.com/Fabiz/MeeusJs) library, with the addition of some simplified interfaces and helper functions.
 
-In addition, this fork contains one major function from the [SunCalc](https://github.com/mourner/suncalc) library by Vladimir Agafonkin that allow us to gather a variety of solar times (dawn, dusk, nadir, solar noon, golden hour, etc.)
+In addition, this fork contains one major function from the [SunCalc](https://github.com/mourner/suncalc) library by Vladimir Agafonkin that gathers a variety of solar times (dawn, dusk, nadir, solar noon, golden hour, etc.)
 
 Why the fork? 
 
-Meeus is a modular multi-file library that consists of one super object with 15 child objects for each category of formulas. In order to arrive at a desired result you must build a "recipe" of methods. For example, to get solar position data using the original library required three separate function calls:
+MeeusJS is a modular multi-file library that consists of one super object with 15 child objects for each category of mathematical formulas. In order to arrive at a desired result set you must build a "recipe" of methods. For example, to get solar position data using MeeusJS requires this:
 
     var jdo = new A.JulianDay(new Date())
     var coord = A.EclCoord.fromWgs84(lat, lon)
     var tp = A.Solar.topocentricPosition(jdo, coord, true)
 
-Using Astro, the above result only requires only one function call:
+Using Astro's simplified interface, the above result only requires only one function call:
 
     var sunpos = A.get.sunPosition(new Date, lat, lon)
 
-Asto also provides additional return data types to some of the methods for convenience. For example, solar and lunar azimuth is available in degrees rather than only radians. Lunar distance is provided both in miles and kilometers. That sort of thing to make working with Astro very fast. 
+Asto's methods also provides additional return data types for convenience. For example, solar and lunar azimuth is also available in degrees rather than only radian. That sort of thing to make working with Astro very fast.
 
-What prompted me to fork this library is I was creating a [Hologram](https://gethologram.com/widgets/orbitron-5000) widget that displays solar and lunar informaiton. I tested a few libraries and found limitations in each one. I ended up using both MeeusJS and SunCalc and writing a few of my own functions. It worked, but it wasn't the cleanest approach so I built Astro. 
+What prompted me to fork this library is I was creating a [Hologram](https://gethologram.com/widgets/orbitron-5000) widget that displays solar and lunar informaiton. I tested a few libraries and found limitations in each one. I ended up using both MeeusJS and SunCalc together and writing a few of my own functions. It worked, but it wasn't the cleanest approach so I built Astro.
 
 ---
 
 ## Usage
 
-To get started fast, look at the [examples.html](https://github.com/rickellis/Astro/blob/main/examples.html) file.
+The [examples.html](https://github.com/rickellis/Astro/blob/main/examples.html) file will let you run all the below functions.
 
 ----
 
