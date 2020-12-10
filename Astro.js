@@ -529,6 +529,7 @@ A.Util = {
 
 // END NEW FUNCTIONS
 // BELOW IS THE MEEKUS.JS LIBRARY
+// THE SUNCALC CODE IS IN THE A.SOLAR OBJECT
 
 
 // -----------------------------------------------------------------------------------
