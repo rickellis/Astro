@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"></meta>
+	<meta name="viewport" content="width=device-width"></meta>
+	<title>Examples Tests</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="Astro.js"></script>
+
+</head>
+
+<body>
+	
+	<script>	
+
+		var lat = 41.31080
+		var lon = -105.59035
+
+
+		console.log('Sun Position')
+		console.log(A.get.sunPosition(new Date, lat, lon))
+
+		console.log('Moon Position')
+		console.log(A.get.moonPosition(new Date, lat, lon))
+
+		console.log('Moon Illumination')
+		console.log(A.get.moonIllumination(new Date, lat, lon))
+
+		console.log('Sun Times')
+		console.log(A.get.sunTimes(new Date, lat, lon))
+
+		console.log('Sun Time Events')
+		console.log(A.get.sunTimesAll(new Date(), lat, lon))
+
+		console.log('Moon Times')
+		console.log(A.get.moonTimes(new Date, lat, lon))
+
+		console.log('Moon Distance')
+		console.log(A.get.lunarDistance(new Date, 1, true));
+
+		console.log('Summer Solstice')
+		console.log(A.get.summerSolstice(2021));
+
+		console.log('Winter Solstice')
+		console.log(A.get.winterSolstice(2021));
+
+		console.log('Vernal Equinox')
+		console.log(A.get.vernalEquinox(2021));
+
+		console.log('Fall Equinox')
+		console.log(A.get.fallEquinox(2021));
+
+
+	</script>
+
+</body>
+</html>
+
+
