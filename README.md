@@ -32,6 +32,7 @@ What prompted me to fork this library is I was building a [Hologram](https://get
 
 To get started fast, look at the [examples.html](https://github.com/rickellis/Astro/blob/main/examples.html) file.
 
+----
 
 ### Sun Position
 
