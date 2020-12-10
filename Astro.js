@@ -9,38 +9,36 @@
 //    VERSION 1.0.0
 // -----------------------------------------------------------------------------------
 // 
-//  Astro is a fork of Fabio Soldati's excellent MeeusJS library, with the addition of
-//  some simplified interfaces and helper functions.
-//
-//  The original library is an implementation of algorithms from the second edition
-//  of 'Astronomical Algorithms of Jean Meeus'.
-//
-//  In addition, this fork contains one major function from the SunCalc.js library 
-//  that allow us to gather a variety of solar times (dawn, dusk, nadir, solar noon, 
-//  golden hour, etc.)
-//
-//  Why the fork? 
+//  Solar and Lunar Astronomical Calculation Library written in Javascript
 // 
-//  Meeus is a modular multi-file library that consists of one super object with 15
-//  child objects for each category of data formulas. In order to arrive at a result
-//  you must build a "recipe" of methods, one that often feeds the result of one 
-//  object into another.
+//  Astro is a fork of Fabio Soldati's excellent MeeusJS library. It also contains one 
+//  major function from the SunCalc library by Vladimir Agafonkin. `I added to the library 
+//  and built simplified interfaces.
 // 
-//  For example, to get solar position data using the original library required 
-//  three separate function calls:
-//
-//        var jdo = new A.JulianDay(new Date())
-//        var coord = A.EclCoord.fromWgs84(lat, lon)
-//        var tp = A.Solar.topocentricPosition(jdo, coord, true)
-//
-//  Using Astro, the above result only requires only one function call:
-//
+//  Why the fork?
+// 
+//  I was creating a Hologram widget that displays solar and lunar informaiton. I tested 
+//  a few libraries and found limitations in each one, so I ended up using both MeeusJS 
+//  and SunCalc together and writing additional functions. It worked, but it wasn't the 
+//  cleanest approach.
+//  
+//  I had two goals for Asto. First, I wanted a complete library that had all the commonly
+//   neneded solar and lunar calculations. The second goal was a library with very simple 
+//  interfaces for fast development. 
+//  
+//  For example, to get solar position data using MeeusJS requires this:
+// 
+//      var jdo = new A.JulianDay(new Date())
+//      var coord = A.EclCoord.fromWgs84(lat, lon)
+//      var tp = A.Solar.topocentricPosition(jdo, coord, true)
+// 
+//  Using Astro only requires only one function call:
+// 
 //      var sunpos = A.get.sunPosition(new Date, lat, lon)
 // 
-//  I also added additional return data types to some of the methods for convenience. 
-//  For example, solar and lunar azimuth is available in degrees rather than only radians. 
-// 	Lunar distance is provided both in miles and kilometers. That sort of thing to 
-// 	make working wiht Astro very fast. 
+//  Asto's methods also provides additional return data types for convenience. For example, 
+//  solar and lunar azimuth is also available in degrees rather than only radian, so that
+//  there is less post-processing necessary for the developer. 
 // 
 // -----------------------------------------------------------------------------------
 //  Authors  :   Astro   :  Rick Ellis           https://github.com/rickellis/Astro
