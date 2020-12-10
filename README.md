@@ -10,7 +10,7 @@ The original MeeusJS library is an implementation of algorithms from the second 
 
 Why the fork? 
 
-Meeus is a modular multi-file library that consists of one super object with 15 child objects for each category of data formulas. In order to arrive at a result you must build a "recipe" of methods, one that often feeds the result of one object into another.
+Meeus is a modular multi-file library that consists of one super object with 15 child objects for each category of formulas. In order to arrive at a desired result you must build a "recipe" of methods, one that often feeds the result of one object into another.
 
 For example, to get solar position data using the original library required three separate function calls:
 
@@ -35,6 +35,9 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 ### Sun Position
 
+Returns horizontal and equatorial solar coordinates.
+
+    // Los Angeles
     var lon = 34.05361
     var lat = -118.24550
 
@@ -48,9 +51,9 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
     // 
     //  Returns an object with:
     //  {
-    //      azimuthInRads: In radians
+    //      azimuthInRads: Azimuth in radians
     //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitudeInRads: In radians
+    //      altitudeInRads: Altitude in radians
     //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
     //      ascension: Right ascension in radians
     //      declination: Declination in radians
@@ -59,6 +62,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 ---
 
 ### Moon Position
+
+Returns horizontal and equatorial lunar coordinates, along with delta and paralactic angle.
 
     var lon = 34.05361
     var lat = -118.24550
@@ -73,9 +78,9 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
     //
     //  Returns an object with:
     //    {
-    //      azimuthInRads: In radians
+    //      azimuthInRads: Azimuth in radians
     //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitudeInRads: In radians
+    //      altitudeInRads: Altitude in radians
     //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
     //      ascension: Right ascension in radians
     //      declination: Declination in radians
@@ -86,6 +91,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 ---
 
 ### Lunar Distance
+
+Distance of the moon in either miles or kilometers.
 
     var lon = 34.05361
     var lat = -118.24550
@@ -110,6 +117,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 ### Moon Illumination
 
+Moon phase and illumination percentage.
+
     var lon = 34.05361
     var lat = -118.24550
 
@@ -119,10 +128,10 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
     //  {
     //      phaseAngle: The illuminated fraction of the moon in radians
     //      illumination: The percentage of the illuminated area of the disk
-    //      phase: moon phase as a number between 0 and 1. See below.
+    //      phase: moon phase as a number between 0 and 1. See below for meaning:
     //  }
     //
-    //      0.00 = New Moon
+    //      0.0 = New Moon
     //      0.125 = Waxing Crescent
     //      0.25 = First Quarter
     //      0.375 = Waxing Gibbous
@@ -134,6 +143,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 ---
 
 ### Sun Times
+
+Returns solar sunrise, sunset, and transit times.
 
     var lon = 34.05361
     var lat = -118.24550
@@ -148,15 +159,17 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
     //
     //  Returns an object with:
     //  {
-    //      rise: Sunrise time in Unix
+    //      sunrise: Sunrise time in Unix
     //      transit: The length of time the sun is above the horizon, in seconds
-    //      set: Sunset time in Unix
+    //      sunset: Sunset time in Unix
     //  }
 
 
 ---
 
 ### Sun Times All
+
+Returns a variety of solar times.
 
     var lon = 34.05361
     var lat = -118.24550
@@ -190,6 +203,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 ### Moon Times
 
+Moonrise, moonset, and transit times.
+
     var lon = 34.05361
     var lat = -118.24550
 
@@ -212,6 +227,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 ### Summer Solstice
 
+Longest day of the year - when the sun is at its most northerly excursion.
+
     var s = A.get.summerSolstice(2021)
 
     //  Takes one argument:
@@ -223,6 +240,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 
 ### Winter Solstice
+
+Shortest day of the year - when the sun is at its most southerly excursion.
 
     var s = A.get.winterSolstice(2021)
 
@@ -236,6 +255,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 ### Vernal Equinox
 
+Spring equinox in March. On the equinox, the day and night are the same length. The time returned indicates the moment when a straight line following the equator travels through the center of the sun.
+
     var s = A.get.vernalEquinox(2021)
 
     //  Takes one argument:
@@ -247,6 +268,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 ### Fall Equinox
 
+Fall Equinox in September. On the equinox, the day and night are the same length. The time returned indicates the moment when a straight line following the equator travels through the center of the sun.
+
     var s = A.get.fallEquinox(2021)
 
     //  Takes one argument:
@@ -257,6 +280,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 ----
 
 ### Radians To Degrees
+
+Converts rads to degrees, and optionally maintains positive or negative value.
 
     A.Util.radiansToDegrees(rads, false)
 
