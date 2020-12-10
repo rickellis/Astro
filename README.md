@@ -22,6 +22,8 @@ Using Astro, the above result only requires only one function call:
 
     var sunpos = A.get.sunPosition(new Date, lat, lon)
 
+I also added additional return data types to some of the methods for convenience. For example, solar and lunar azimuth is available in degrees rather than only radians. Lunar distance is provided both in miles and kilometers. That sort of thing to make working wiht Astro very fast. 
+
 What prompted me to fork this library is I was building a [Hologram](https://gethologram.com) widget that displayed solar and lunar informaiton. I tested a few libraries and found limitaitions in each one. I ended up using both MeeusJS and SunCalc and writing a few additional routines. It worked, but it wasn't the cleanest approach so I built Astro. 
 
 ---
@@ -46,10 +48,10 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
     // 
     //  Returns an object with:
     //  {
-    //      azimuth: In radians
-    //      azInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitude: In radians
-    //      altInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+    //      azimuthInRads: In radians
+    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+    //      altitudeInRads: In radians
+    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
     //      ascension: Right ascension in radians
     //      declination: Declination in radians
     //  }
@@ -71,10 +73,10 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
     //
     //  Returns an object with:
     //    {
-    //      azimuth: In radians
-    //      azInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitude: In radians
-    //      altInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+    //      azimuthInRads: In radians
+    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+    //      altitudeInRads: In radians
+    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
     //      ascension: Right ascension in radians
     //      declination: Declination in radians
     //      delta: Distance between centers of the Earth and Moon, in km
@@ -92,9 +94,8 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
     //  Takes the following arguments:
     //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
+    //      number: options number of decimal places to show
+    //      bool: Whether to format the number with commas
     //
     //  Returns an object with:
     //  {
@@ -117,7 +118,7 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
     //  Returns an object with:
     //  {
     //      phaseAngle: The illuminated fraction of the moon in radians
-    //      illumination: The ratio of the illuminated area of the disk to the total area.
+    //      illumination: The percentage of the illuminated area of the disk
     //      phase: moon phase as a number between 0 and 1. See below.
     //  }
     //
@@ -255,5 +256,53 @@ To get started fast, look at the [examples.html](https://github.com/rickellis/As
 
 ----
 
+### Radians To Degrees
+
+    A.Util.radiansToDegrees(rads, false)
+
+    //  Takes the following arguments:
+    //      Integer: The value in radians you wish to convert
+    //      bool: Whether to preserve the sign. i.e. negative radians returns negative degrees
+    //
+    //  Returns an integer in degrees
+
+---
+
+### Invert a Degree
+
+In other words, 60˚ becomes 240˚. Or 120˚ becomes 300˚.
+
+    A.Util.invertDegree(180)
+
+    //  Takes one argument:
+    //      Integer: The value in degrees you wish to flip
+    //
+    //  Returns an integer in degrees
+
+---
+
+### Number with Commas
+
+    A.Util.numberWithCommas(456254256)
+
+    // Becomes 456,254,256
+
+    //  Takes one argument:
+    //      Integer: The value in degrees you wish to format
+    //
+    //  Returns a number
+
+---
 
 
+## License
+
+MIT
+
+Copyright 2020 Rick Ellis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

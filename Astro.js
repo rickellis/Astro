@@ -37,7 +37,10 @@
 //
 //      var sunpos = A.get.sunPosition(new Date, lat, lon)
 // 
-//  I also added few helper functions.
+//  I also added additional return data types to some of the methods for convenience. 
+//  For example, solar and lunar azimuth is available in degrees rather than only radians. 
+// 	Lunar distance is provided both in miles and kilometers. That sort of thing to 
+// 	make working wiht Astro very fast. 
 // 
 // -----------------------------------------------------------------------------------
 //  Authors  :   Astro   :  Rick Ellis           https://github.com/rickellis/Astro
@@ -105,10 +108,10 @@ A.get = {
     // 
     //  Returns an object with:
     //  {
-    //      azimuth: In radians
-    //      azInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+    //      azimuthInRads: In radians
+    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
     //      altitude: In radians
-    //      altInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
     //      ascension: Right ascension in radians
     //      declination: Declination in radians
     //  }
@@ -120,10 +123,10 @@ A.get = {
         var suntp = A.Solar.topocentricPosition(jdo, coord, true)
 
         return {
-            azimuth: suntp.hz.az,
-            azInDegs: A.Util.radiansToCorrectedDegrees(suntp.hz.az),
-            altitude: suntp.hz.alt,
-            altInDegs: A.Util.radiansToDegrees(suntp.hz.alt, true),
+            azimuthInRads: suntp.hz.az,
+            azimuthInDegs: A.Util.radiansToCorrectedDegrees(suntp.hz.az),
+            altitudeInRads: suntp.hz.alt,
+            altitudeInDegs: A.Util.radiansToDegrees(suntp.hz.alt, true),
             ascension: suntp.eq.ra,
             declination: suntp.eq.dec 
         }
@@ -140,10 +143,10 @@ A.get = {
     //
     //  Returns an object with:
     //  {
-    //      azimuth: In radians
-    //      azInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitude: In radians
-    //      altInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+    //      azimuthInRads: In radians
+    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+    //      altitudeInRads: In radians
+    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
     //      ascension: Right ascension in radians
     //      declination: Declination in radians
     //      delta: Distance between centers of the Earth and Moon, in km
@@ -157,10 +160,10 @@ A.get = {
         var moontp = A.Moon.topocentricPosition(jdo, coord, true);
 
         return {
-            azimuth: moontp.hz.az,
-            azInDegs: A.Util.radiansToCorrectedDegrees(moontp.hz.az),
-            altitude: moontp.hz.alt,
-            altInDegs: A.Util.radiansToDegrees(moontp.hz.alt, true),
+            azimuthInRads: moontp.hz.az,
+            azimuthInDegs: A.Util.radiansToCorrectedDegrees(moontp.hz.az),
+            altitudeInRads: moontp.hz.alt,
+            altitudeInDegs: A.Util.radiansToDegrees(moontp.hz.alt, true),
             ascension: moontp.eq.ra,
             declination: moontp.eq.dec,
             delta: moontp.delta,
@@ -173,9 +176,8 @@ A.get = {
     // 
     //  Takes the following arguments:
     //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
+    //      number: options number of decimal places to show
+    //      bool: Whether to format the number with commas
     //
     //  Returns an object with:
     //  {
@@ -307,14 +309,14 @@ A.get = {
         var coord = A.EclCoord.fromWgs84(lat, lon, h);
         var suntimes = A.Solar.times(jdo, coord);
         var daylight = suntimes.set - suntimes.rise
-        var night = 86400 - daylight
+		var night = 86400 - daylight
 
         var events = A.Solar.getSunTimeEvents(date, lat, lon, h)
-        events.sunrise = new Date(A.Util.formatISOdateString(date, suntimes.rise))
+        events.sunrise = new Date(A.Util.formatISOdateString(date, suntimes.rise,))
         events.sunset = new Date(A.Util.formatISOdateString(date, suntimes.set))
         events.transit = new Date(A.Util.formatISOdateString(date, suntimes.transit))
-        events.dayLength = A.Coord.secondsToHMSStr(daylight)
-        events.nightLength = A.Coord.secondsToHMSStr(night)
+        events.dayLength = A.Coord.secondsToHMSStr(daylight, false)
+        events.nightLength = A.Coord.secondsToHMSStr(night, false)
         return events
     },
 
@@ -340,9 +342,9 @@ A.get = {
         var moontimes = A.Moon.times(jdo, coord);
 
         return {
-            sunrise: new Date(A.Util.formatISOdateString(date, moontimes.rise)),
+            moonrise: new Date(A.Util.formatISOdateString(date, moontimes.rise)),
             transit: new Date(A.Util.formatISOdateString(date, moontimes.transit)),
-            sunset: new Date(A.Util.formatISOdateString(date, moontimes.set)),
+            moonset: new Date(A.Util.formatISOdateString(date, moontimes.set)),
         }
     },
 
@@ -492,7 +494,7 @@ A.Util = {
                 degrees = degress - 360
             }
         }
-        return this.invertDegrees(degrees)
+        return this.invertDegree(degrees)
     },
 
     // -----------------------------------------------------------------------------------
@@ -506,7 +508,7 @@ A.Util = {
     //  Returns an integer in degrees
     // -----------------------------------------------------------------------------------
 
-    invertDegrees: function(deg) {
+    invertDegree: function(deg) {
         return deg <= 179 ? deg + 180 : deg - 180
     },
 
@@ -2966,88 +2968,115 @@ A.Solar = {
 
     // angle, morning name, evening name
     eventTimes: [
-        [-6, 'dawn', 'dusk' ],
+        [-6, 'dawn', 'dusk'],
         [-6, 'goldenHourAmStart', 'goldenHourPmEnd'],
         [6, 'goldenHourAmEnd', 'goldenHourPmStart']
     ],
 
-    toJulian: function(date) { 
-        return date.valueOf() / 86400000 - 0.5 + 2440588
-    },
-    fromJulian: function(j)  { 
-        return new Date((j + 0.5 - 2440588) * 86400000) 
-    },
-    declination: function(l, b) {
-        var e = (Math.PI / 180) * 23.4397  // obliquity of the Earth
-        return Math.asin(Math.sin(b) * Math.cos(e) + Math.cos(b) * Math.sin(e) * Math.sin(l)) 
-    },
-    solarMeanAnomaly: function(d) { 
-        return (Math.PI / 180) * (357.5291 + 0.98560028 * d) 
-    },
-    eclipticLongitude: function(M) {
-        var C = (Math.PI / 180) * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M)), // equation of center
-            P = (Math.PI / 180) * 102.9372 // perihelion of the Earth
-        return M + C + P + Math.PI
-    },
-    julianCycle: function(d, lw) { 
-        return Math.round(d - 0.0009 - lw / (2 * Math.PI)) 
-    },
-    approxTransit: function(Ht, lw, n) { 
-        return 0.0009 + (Ht + lw) / (2 * Math.PI) + n
-    },
-    solarTransitJ: function(ds, M, L)  { 
-        return 2451545 + ds + 0.0053 * Math.sin(M) - 0.0069 * Math.sin(2 * L) 
-    },
-    hourAngle: function(h, phi, d) { 
-        return Math.acos((Math.sin(h) - Math.sin(phi) * Math.sin(d)) / (Math.cos(phi) * Math.cos(d))) 
-    },
-    observerAngle: function(height) { 
-        return -2.076 * Math.sqrt(height) / 60 
-    },
-    // returns set time for the given sun altitude
-    getSetJ: function(h, lw, phi, dec, n, M, L) {
-        var w = this.hourAngle(h, phi, dec),
-            a = this.approxTransit(w, lw, n)
-        return this.solarTransitJ(a, M, L)
-    },
+	
+
+	toJulian: function(date) { 
+		return date.valueOf() / 86400000 - 0.5 + 2440588;
+	},
+	
+	fromJulian: function(j)  { 
+		return new Date((j + 0.5 - 2440588) * 86400000);
+	},
+	
+	toDays: function(date)   { 
+		return this.toJulian(date) - 2451545;
+	},
+	
+	rightAscension: function(l, b) { 
+		return Math.atan2(Math.sin(l) * Math.cos(((Math.PI / 180) * 23.4397)) - Math.tan(b) * Math.sin(((Math.PI / 180) * 23.4397)), Math.cos(l));
+	},
+	declination: function(l, b)    { 
+		return Math.asin(Math.sin(b) * Math.cos(((Math.PI / 180) * 23.4397)) + Math.cos(b) * Math.sin(((Math.PI / 180) * 23.4397)) * Math.sin(l));
+	},
+
+	solarMeanAnomaly: function(d) { 
+		return Math.PI / 180 * (357.5291 + 0.98560028 * d);
+	},
+	
+	eclipticLongitude: function(M) {
+		var C = Math.PI / 180 * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M)), // equation of center
+			P = Math.PI / 180 * 102.9372; // perihelion of the Earth
+		return M + C + P + Math.PI;
+	},
+	
+	julianCycle: function(d, lw) { 
+		return Math.round(d - 0.0009 - lw / (2 * Math.PI));
+	},
+	
+	approxTransit: function(Ht, lw, n) { 
+		return 0.0009 + (Ht + lw) / (2 * Math.PI) + n;
+	},
+	
+	solarTransitJ: function(ds, M, L)  { 
+		return 2451545 + ds + 0.0053 * Math.sin(M) - 0.0069 * Math.sin(2 * L);
+	},
+	
+	hourAngle: function(h, phi, d) { 
+		return Math.acos((Math.sin(h) - Math.sin(phi) * Math.sin(d)) / (Math.cos(phi) * Math.cos(d)));
+	},
+	
+	observerAngle: function(height) { 
+		return -2.076 * Math.sqrt(height) / 60;
+	},
+	
+	// returns set time for the given sun altitude
+	getSetJ: function(h, lw, phi, dec, n, M, L) {
+		var w = this.hourAngle(h, phi, dec),
+			a = this.approxTransit(w, lw, n);
+		return this.solarTransitJ(a, M, L);
+	},
+
+	sunCoords: function(d) {
+		var M = this.solarMeanAnomaly(d),
+			L = this.eclipticLongitude(M);
+	
+		return {
+			dec: this.declination(L, 0),
+			ra: this.rightAscension(L, 0)
+	  }
+	},
+	
     addSunTime: function (angle, riseName, setName) {
         this.eventTimes.push([angle, riseName, setName])
-    },
+	},
+	
     getSunTimeEvents: function (date, lat, lng, height = 0) {
-        var lw = (Math.PI / 180) * -lng
-        var phi = (Math.PI / 180) * lat
-        var dh = this.observerAngle(height)
-        var d = this.toJulian(date) - 2451545
-        var n = this.julianCycle(d, lw)
-        var ds = this.approxTransit(0, lw, n)
-        var M = this.solarMeanAnomaly(ds)
-        var L = this.eclipticLongitude(M)
-        var dec = this.declination(L, 0)
-        var Jnoon = this.solarTransitJ(ds, M, L)
-        var i
-        var len
-        var time
-        var h0
-        var Jset
-        var Jrise
-    
-        var result = {
-            solarNoon: this.fromJulian(Jnoon),
-            nadir: this.fromJulian(Jnoon - 0.5)
-        }
-    
+		var lw = (Math.PI / 180) * -lng
+		var phi = (Math.PI / 180) * lat
+		var dh = this.observerAngle(height)
+		var d = this.toDays(date) - 2451545
+		var n = this.julianCycle(d, lw)
+		var ds = this.approxTransit(0, lw, n)
+		var M = this.solarMeanAnomaly(ds)
+		var L = this.eclipticLongitude(M)
+		var dec = this.declination(L, 0)
+		var Jnoon = this.solarTransitJ(ds, M, L)
+		var i
+		var len 
+		var time 
+		var h0
+		var Jset
+		var Jrise
+
+		var result = {
+			solarNoon: this.fromJulian(Jnoon),
+			nadir: this.fromJulian(Jnoon - 0.5)
+		};
+	
         for (i = 0, len = this.eventTimes.length; i < len; i += 1) {
-            time = this.eventTimes[i]
-            h0 = (time[0] + dh) * (Math.PI / 180)
-    
-            Jset = this.getSetJ(h0, lw, phi, dec, n, M, L)
-            Jrise = Jnoon - (Jset - Jnoon)
-    
-            result[time[1]] = this.fromJulian(Jrise)
-            result[time[2]] = this.fromJulian(Jset)
-        }
-    
-        return result
+			time = this.eventTimes[i]
+			h0 = (time[0] + dh) * (Math.PI / 180);
+			Jset = this.getSetJ(h0, lw, phi, dec, n, M, L);
+			Jrise = Jnoon - (Jset - Jnoon);
+			result[time[1]] = this.fromJulian(Jrise);
+			result[time[2]] = this.fromJulian(Jset);
+		}
+		return result;
     }
 }
 
