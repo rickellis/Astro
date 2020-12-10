@@ -382,7 +382,7 @@ A.get = {
     //  Vernal Equinox.
     //
     //  Spring equinox in March. On the equinox, the day and night are the same length. 
-    //  The time returned time indicates the moment when a straight line following the 
+    //  The time returned indicates the moment when a straight line following the 
     //  equator travels through the center of the sun.
     //
     //  Takes one argument:
@@ -399,7 +399,7 @@ A.get = {
     //  Fall Equinox.
     //
     //  Fall Equinox in September. On the equinox, the day and night are the same length. 
-    //  The time returned time indicates the moment when a straight line following the equator
+    //  The time returned indicates the moment when a straight line following the equator
     //  travels through the center of the sun.
     //
     //  Takes one argument:
