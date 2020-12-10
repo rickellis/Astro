@@ -24,7 +24,7 @@ Using Astro, the above result only requires only one function call:
 
 I also added additional return data types to some of the methods for convenience. For example, solar and lunar azimuth is available in degrees rather than only radians. Lunar distance is provided both in miles and kilometers. That sort of thing to make working wiht Astro very fast. 
 
-What prompted me to fork this library is I was building a [Hologram](https://gethologram.com) widget that displayed solar and lunar informaiton. I tested a few libraries and found limitaitions in each one. I ended up using both MeeusJS and SunCalc and writing a few additional routines. It worked, but it wasn't the cleanest approach so I built Astro. 
+What prompted me to fork this library is I was building a [Hologram](https://gethologram.com) widget that displayed solar and lunar informaiton. I tested a few libraries and found limitations in each one. I ended up using both MeeusJS and SunCalc and writing a few additional routines. It worked, but it wasn't the cleanest approach so I built Astro. 
 
 ---
 
