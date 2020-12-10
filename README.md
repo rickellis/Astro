@@ -8,7 +8,7 @@ Why the fork?
 
 I was creating a [Hologram](https://gethologram.com/widgets/orbitron-5000) widget that displays solar and lunar informaiton. I tested a few libraries and found limitations in each one, so I ended up using both MeeusJS and SunCalc together and writing additional functions. It worked, but it wasn't the cleanest approach.
 
-I had two goals for Asto. First, I wanted a complete library that had all the commonly neneded solar and lunar calculations. The second goal was a library with very simple interfaces for fast development. 
+I had two goals for Astro. First, I wanted a complete library that had all the commonly neneded solar and lunar calculations. The second goal was a library with very simple interfaces for fast development. 
 
 For example, to get solar position data using MeeusJS requires this:
 
@@ -20,7 +20,7 @@ Using Astro only requires only one function call:
 
     var sunpos = A.get.sunPosition(new Date, lat, lon)
 
-Asto's methods also provides additional return data types for convenience. For example, solar and lunar azimuth is also available in degrees rather than only radian, so that there is less post-processing necessary for the developer. 
+Astro's methods also provides additional return data types for convenience. For example, solar and lunar azimuth is also available in degrees rather than only radian, so that there is less post-processing necessary for the developer. 
 
 
 ---
