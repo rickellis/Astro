@@ -203,21 +203,21 @@ Takes four arguments:
 Returns an object containing:
 
     {
+        dawn: date object
         nauticalDawn:  date object
-        dawn:  date object
-        goldenAmStart:  date object
-        sunrise:  date object
+        dawnStart:  date object
+        gHourAmStart:  date object
+        sunriseStart:  date object
         sunriseEnd:  date object
-        goldenAmEnd:  date object
+        gHourAmEnd:  date object
         transit:  date object
         solarNoon:  date object
-        goldenPmStart:  date object
+        gHourPmStart:  date object
         sunsetStart:  date object
-        sunset:  date object
-        dusk:  date object
-        goldenPmEnd:  date object
+        duskStart:  date object
+        gHourPmEnd:  date object
         nauticalDusk:  date object
-        night:  date object
+        nightStart:  date object
         nadir:  date object
         nightEnd:  date object
         dayLength:  String in "HH:MM:SS"
@@ -239,6 +239,28 @@ Takes 3 arguments:
 For example, to add an event that gets the astromomical twighlight and dawn times when the sun is at an angle of -18˚ you would do this:
 
     A.Set.sunEvent(-18, 'astronomicalTwighlight' ,'astronomicalDawn')
+
+**Default Events** 
+
+These are the events that get compiled by default:
+
+    nightEnd:      -18
+    nauticalDawn:  -12
+    dawnStart:     -6
+    gHourAmStart:  -4
+    sunriseStart:  -0.833
+    sunriseEnd:    -0.3
+    gHourAmEnd:     6
+
+    ..... Daytime ......
+
+    gHourPmStart:   6
+    sunsetStart:   -0.3
+    sunsetStart:   -0.833 
+    duskStart:     -6
+    gHourPmEnd:    -4
+    nauticalDusk:  -12
+    nightStart:    -18
 
 ---
 

@@ -87,12 +87,13 @@ A.AU = 149597870
 
 // angle, morning name, evening name
 A.sunEventsArray = [
-	[-0.3,   'sunriseEnd',   'sunsetStart'],
-	[-12,    'nauticalDawn',  'nauticalDusk'],
-	[-18,    'nightEnd',      'night'],
-	[-6, 	 'dawn',          'dusk'],
-	[-4,     'goldenAmStart', 'goldenPmEnd'],
-	[ 6,     'goldenAmEnd',   'goldenPmStart']
+    [-0.833, 'sunriseStart',  'sunsetStart'],
+	[-0.3,   'sunRiseEnd',   'sunSetStart' ],
+	[-12,    'nauticalDawn', 'nauticalDusk'],
+	[-18,    'nightEnd',     'nightStart'  ],
+	[-6, 	 'dawnStart',    'duskStart'   ],
+	[-4,     'gHourAmStart', 'gHourPmEnd'  ],
+	[ 6,     'gHourAmEnd',   'gHourPmStart']
 ]
 
 
@@ -299,20 +300,19 @@ A.Get = {
     //  {
     //      dawn: date object
 	//       nauticalDawn:  date object
-	//       dawn:  date object
-	//       goldenAmStart:  date object
-	//       sunrise:  date object
+	//       dawnStart:  date object
+	//       gHourAmStart:  date object
+	//       sunriseStart:  date object
 	//       sunriseEnd:  date object
-	//       goldenAmEnd:  date object
+	//       gHourAmEnd:  date object
 	//       transit:  date object
 	//       solarNoon:  date object
-	//       goldenPmStart:  date object
+	//       gHourPmStart:  date object
 	//       sunsetStart:  date object
-	//       sunset:  date object
-	//       dusk:  date object
-	//       goldenPmEnd:  date object
+	//       duskStart:  date object
+	//       gHourPmEnd:  date object
 	//       nauticalDusk:  date object
-	//       night:  date object
+	//       nightStart:  date object
 	//       nadir:  date object
 	//       nightEnd:  date object
 	//       dayLength:  String in "HH:MM:SS"
@@ -328,8 +328,8 @@ A.Get = {
 		let night = 86400 - daylight
 
 		let events = A.Solar.sunEvents(date, lat, lon, h)
-        events.sunrise = new Date(A.Util.formatISOdateString(date, suntimes.rise,))
-        events.sunset = new Date(A.Util.formatISOdateString(date, suntimes.set))
+        // events.sunrise = new Date(A.Util.formatISOdateString(date, suntimes.rise,))
+        // events.sunset = new Date(A.Util.formatISOdateString(date, suntimes.set))
         events.transit = new Date(A.Util.formatISOdateString(date, suntimes.transit))
         events.dayLength = A.Coord.secondsToHMSStr(daylight, false)
 		events.nightLength = A.Coord.secondsToHMSStr(night, false)
