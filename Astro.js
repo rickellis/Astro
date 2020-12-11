@@ -1,12 +1,12 @@
 // -----------------------------------------------------------------------------------
-//       __   ____  ____  ____   __  
-//      / _\ / ___)(_  _)(  _ \ /  \ 
-//     /    \\___ \  )(   )   /(  O )
-//     \_/\_/(____/ (__) (__\_) \__/ 
+//	   __	____  ____  ____   __  
+//	  / _\ / ___)(_  _)(  _ \ /  \ 
+//	 /	\  \___ \  )(	)	/(  O )
+//	 \_/\_/(____/ (__) (__\_) \__/ 
 // 
-//    Astronomical Calculation Library
+//	Astronomical Calculation Library
 // -----------------------------------------------------------------------------------
-//    VERSION 1.0.0
+//	VERSION 1.0.0
 // -----------------------------------------------------------------------------------
 // 
 //  Solar and Lunar Astronomical Calculation Library written in Javascript
@@ -23,28 +23,28 @@
 //  cleanest approach.
 //  
 //  I had two goals for Asto. First, I wanted a complete library that had all the commonly
-//   neneded solar and lunar calculations. The second goal was a library with very simple 
+//	neneded solar and lunar calculations. The second goal was a library with very simple 
 //  interfaces for fast development. 
 //  
 //  For example, to get solar position data using MeeusJS requires this:
 // 
-//      var jdo = new A.JulianDay(new Date())
-//      var coord = A.EclCoord.fromWgs84(lat, lon)
-//      var tp = A.Solar.topocentricPosition(jdo, coord, true)
+//	  var jdo = new A.JulianDay(new Date())
+//	  var coord = A.EclCoord.fromWgs84(lat, lon)
+//	  var tp = A.Solar.topocentricPosition(jdo, coord, true)
 // 
 //  Using Astro only requires only one function call:
 // 
-//      var sunpos = A.get.sunPosition(new Date, lat, lon)
+//	  var sunpos = A.get.sunPosition(new Date, lat, lon)
 // 
 //  Asto's methods also provides additional return data types for convenience. For example, 
 //  solar and lunar azimuth is also available in degrees rather than only radian, so that
 //  there is less post-processing necessary for the developer. 
 // 
 // -----------------------------------------------------------------------------------
-//  Authors  :   Astro   :  Rick Ellis           https://github.com/rickellis/Astro
-//           :   MeeusJS :  Fabio Soldati        https://github.com/Fabiz/MeeusJs
-//           :   SunCalc :  Vladimir Agafonkin   https://github.com/mourner/suncalc
-//  License  :   MIT
+//  Authors	:	Astro	:  Rick Ellis			https://github.com/rickellis/Astro
+//			:	MeeusJS	:  Fabio Soldati		https://github.com/Fabiz/MeeusJs
+//			:	SunCalc	:  Vladimir Agafonkin	https://github.com/mourner/suncalc
+//  License	:	MIT
 // -----------------------------------------------------------------------------------
 
 
@@ -87,13 +87,13 @@ A.AU = 149597870
 
 // angle, morning name, evening name
 A.sunEventsArray = [
-    [-0.833, 'sunriseStart',  'sunsetStart'],
-	[-0.3,   'sunRiseEnd',   'sunSetStart' ],
-	[-12,    'nauticalDawn', 'nauticalDusk'],
-	[-18,    'nightEnd',     'nightStart'  ],
-	[-6, 	 'dawnStart',    'duskStart'   ],
-	[-4,     'gHourAmStart', 'gHourPmEnd'  ],
-	[ 6,     'gHourAmEnd',   'gHourPmStart']
+	[-0.833, 'sunriseStart',  'sunsetStart'],
+	[-0.3,	'sunRiseEnd',	'sunSetStart'	],
+	[-12,	'nauticalDawn', 'nauticalDusk'	],
+	[-18,	'nightEnd',	 	'nightStart'  	],
+	[-6, 	 'dawnStart',	'duskStart'		],
+	[-4,	 'gHourAmStart', 'gHourPmEnd'	],
+	[ 6,	 'gHourAmEnd',	 'gHourPmStart'	]
 ]
 
 
@@ -107,326 +107,326 @@ A.sunEventsArray = [
 A.Get = {
 
 
-    // -----------------------------------------------------------------------------------
-    //  Sun Position
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    // 
-    //  Returns an object with:
-    //  {
-    //      azimuthInRads: In radians
-    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitude: In radians
-    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
-    //      ascension: Right ascension in radians
-    //      declination: Declination in radians
-    //  }
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Sun Position
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object.
+	//	  integer: Latitude
+	//	  integer: Longitude
+	//	  integer: Optional height above sea level, in meters
+	// 
+	//  Returns an object with:
+	//  {
+	//	  azimuthInRads: In radians
+	//	  azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+	//	  altitude: In radians
+	//	  altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+	//	  ascension: Right ascension in radians
+	//	  declination: Declination in radians
+	//  }
+	// -----------------------------------------------------------------------------------
 
-    sunPosition: function(date, lat, lon, h = 0) {
-        var jdo = new A.JulianDay(date); 
-        var coord = A.EclCoord.fromWgs84(lat, lon, h);
-        var suntp = A.Solar.topocentricPosition(jdo, coord, true)
+	sunPosition: function(date, lat, lon, h = 0) {
+		var jdo = new A.JulianDay(date); 
+		var coord = A.EclCoord.fromWgs84(lat, lon, h);
+		var suntp = A.Solar.topocentricPosition(jdo, coord, true)
 
-        return {
-            azimuthInRads: suntp.hz.az,
-            azimuthInDegs: A.Util.radiansToCorrectedDegrees(suntp.hz.az),
-            altitudeInRads: suntp.hz.alt,
-            altitudeInDegs: A.Util.radiansToDegrees(suntp.hz.alt, true),
-            ascension: suntp.eq.ra,
-            declination: suntp.eq.dec 
-        }
-    },
+		return {
+			azimuthInRads: suntp.hz.az,
+			azimuthInDegs: A.Util.radiansToCorrectedDegrees(suntp.hz.az),
+			altitudeInRads: suntp.hz.alt,
+			altitudeInDegs: A.Util.radiansToDegrees(suntp.hz.alt, true),
+			ascension: suntp.eq.ra,
+			declination: suntp.eq.dec 
+		}
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Moon Position
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      azimuthInRads: In radians
-    //      azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
-    //      altitudeInRads: In radians
-    //      altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
-    //      ascension: Right ascension in radians
-    //      declination: Declination in radians
-    //      delta: Distance between centers of the Earth and Moon, in km
-    //      paralacticAngle: In radians 
-    //  }
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Moon Position
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object.
+	//	  integer: Latitude
+	//	  integer: Longitude
+	//	  integer: Optional height above sea level, in meters
+	//
+	//  Returns an object with:
+	//  {
+	//	  azimuthInRads: In radians
+	//	  azimuthInDegs: Azimuth in corrected degrees. 0˚ N, 90˚ E, 180˚ S, 270˚ W
+	//	  altitudeInRads: In radians
+	//	  altitudeInDegs: Altitude in degrees. 0° horizon, +90° zenith, −90° is nadir (down).
+	//	  ascension: Right ascension in radians
+	//	  declination: Declination in radians
+	//	  delta: Distance between centers of the Earth and Moon, in km
+	//	  paralacticAngle: In radians 
+	//  }
+	// -----------------------------------------------------------------------------------
 
-    moonPosition: function(date, lat, lon, h = 0) {
-        var jdo = new A.JulianDay(date); 
-        var coord = A.EclCoord.fromWgs84(lat, lon, h);
-        var moontp = A.Moon.topocentricPosition(jdo, coord, true);
+	moonPosition: function(date, lat, lon, h = 0) {
+		var jdo = new A.JulianDay(date); 
+		var coord = A.EclCoord.fromWgs84(lat, lon, h);
+		var moontp = A.Moon.topocentricPosition(jdo, coord, true);
 
-        return {
-            azimuthInRads: moontp.hz.az,
-            azimuthInDegs: A.Util.radiansToCorrectedDegrees(moontp.hz.az),
-            altitudeInRads: moontp.hz.alt,
-            altitudeInDegs: A.Util.radiansToDegrees(moontp.hz.alt, true),
-            ascension: moontp.eq.ra,
-            declination: moontp.eq.dec,
-            delta: moontp.delta,
-            paralacticAngle: moontp.q
-        }
-    },
+		return {
+			azimuthInRads: moontp.hz.az,
+			azimuthInDegs: A.Util.radiansToCorrectedDegrees(moontp.hz.az),
+			altitudeInRads: moontp.hz.alt,
+			altitudeInDegs: A.Util.radiansToDegrees(moontp.hz.alt, true),
+			ascension: moontp.eq.ra,
+			declination: moontp.eq.dec,
+			delta: moontp.delta,
+			paralacticAngle: moontp.q
+		}
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Lunar Distance
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      number: options number of decimal places to show
-    //      bool: Whether to format the number with commas
-    //
-    //  Returns an object with:
-    //  {
-    //      kilometers: Distance to the moon in kilometers
-    //      miles: Distance to the moon in miles
-    //  }
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Lunar Distance
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object.
+	//	  number: options number of decimal places to show
+	//	  bool: Whether to format the number with commas
+	//
+	//  Returns an object with:
+	//  {
+	//	  kilometers: Distance to the moon in kilometers
+	//	  miles: Distance to the moon in miles
+	//  }
+	// -----------------------------------------------------------------------------------
 
-    lunarDistance: function(date, decimals = -1, format = false) {
-        let julianDate = (((date.valueOf() / 86400000) - 0.5 + 2440588) - 2451545)
-        let meanAnomaly = (Math.PI / 180) * (134.963 + 13.064993 * julianDate)
-        let kilometers = 385001 - 20905 * Math.cos(meanAnomaly)
-        let miles = kilometers / 1.6
+	lunarDistance: function(date, decimals = -1, format = false) {
+		let julianDate = (((date.valueOf() / 86400000) - 0.5 + 2440588) - 2451545)
+		let meanAnomaly = (Math.PI / 180) * (134.963 + 13.064993 * julianDate)
+		let kilometers = 385001 - 20905 * Math.cos(meanAnomaly)
+		let miles = kilometers / 1.6
 
-        if (decimals > 0) {
-            kilometers = kilometers.toFixed(decimals)
-            miles = miles.toFixed(decimals)
-        }
+		if (decimals > 0) {
+			kilometers = kilometers.toFixed(decimals)
+			miles = miles.toFixed(decimals)
+		}
 
-        kilometers = (format == true) ? A.Util.numberWithCommas(kilometers) : kilometers
-        miles = (format == true) ? A.Util.numberWithCommas(miles) : miles
+		kilometers = (format == true) ? A.Util.numberWithCommas(kilometers) : kilometers
+		miles = (format == true) ? A.Util.numberWithCommas(miles) : miles
 
-        return {
-            kilometers: kilometers,
-            miles: miles
-        }
-    },
+		return {
+			kilometers: kilometers,
+			miles: miles
+		}
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Moon Illumination
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      phaseAngle: The illuminated fraction of the moon in radians
-    //      illumination: The ratio of the illuminated area of the disk to the total area.
-    //      phase: moon phase as a number between 0 and 1. See below.
-    //  }
-    //
-    //      0.00 = New Moon
-    //      0.125 = Waxing Crescent
-    //      0.25 = First Quarter
-    //      0.375 = Waxing Gibbous
-    //      0.5	= Full Moon
-    //      62.5 = Waning Gibbous
-    //      0.75 = Last Quarter
-    //      0.875 = Waning Crescent
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Moon Illumination
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object.
+	//	  integer: Latitude
+	//	  integer: Longitude
+	//	  integer: Optional height above sea level, in meters
+	//
+	//  Returns an object with:
+	//  {
+	//	  phaseAngle: The illuminated fraction of the moon in radians
+	//	  illumination: The ratio of the illuminated area of the disk to the total area.
+	//	  phase: moon phase as a number between 0 and 1. See below.
+	//  }
+	//
+	//	  0.00 = New Moon
+	//	  0.125 = Waxing Crescent
+	//	  0.25 = First Quarter
+	//	  0.375 = Waxing Gibbous
+	//	  0.5	= Full Moon
+	//	  62.5 = Waning Gibbous
+	//	  0.75 = Last Quarter
+	//	  0.875 = Waning Crescent
+	// -----------------------------------------------------------------------------------
 
-    moonIllumination: function(date, lat, lon, h = 0) {
-        var jdo = new A.JulianDay(date); 
-        var coord = A.EclCoord.fromWgs84(lat, lon, h);
-        var suntp = A.Solar.topocentricPosition(jdo, coord, true);
-        var moontp = A.Moon.topocentricPosition(jdo, coord, true);
-        var angle = A.MoonIllum.phaseAngleEq2(moontp.eq, suntp.eq);
-        var illum = A.MoonIllum.illuminated(angle);
-        var phase = (1 - (angle / 10))
+	moonIllumination: function(date, lat, lon, h = 0) {
+		var jdo = new A.JulianDay(date); 
+		var coord = A.EclCoord.fromWgs84(lat, lon, h);
+		var suntp = A.Solar.topocentricPosition(jdo, coord, true);
+		var moontp = A.Moon.topocentricPosition(jdo, coord, true);
+		var angle = A.MoonIllum.phaseAngleEq2(moontp.eq, suntp.eq);
+		var illum = A.MoonIllum.illuminated(angle);
+		var phase = (1 - (angle / 10))
 
-        return {
-            phaseAngle: angle,
-            illumination: illum,
-            phase: phase
-        }
-    },
+		return {
+			phaseAngle: angle,
+			illumination: illum,
+			phase: phase
+		}
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Sun Times
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      sunrise: Sunrise time in Unix
-    //      transit: The length of time the sun is above the horizon, in seconds
-    //      sunset: Sunset time in Unix
-    //  }
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Sun Times
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object.
+	//	  integer: Latitude
+	//	  integer: Longitude
+	//	  integer: Optional height above sea level, in meters
+	//
+	//  Returns an object with:
+	//  {
+	//	  sunrise: Sunrise time in Unix
+	//	  transit: The length of time the sun is above the horizon, in seconds
+	//	  sunset: Sunset time in Unix
+	//  }
+	// -----------------------------------------------------------------------------------
 
-    sunTimes: function(date, lat, lon, h = 0) {
-        var jdo = new A.JulianDay(date); 
-        var coord = A.EclCoord.fromWgs84(lat, lon, h);
-        var suntimes = A.Solar.times(jdo, coord);
+	sunTimes: function(date, lat, lon, h = 0) {
+		var jdo = new A.JulianDay(date); 
+		var coord = A.EclCoord.fromWgs84(lat, lon, h);
+		var suntimes = A.Solar.times(jdo, coord);
 
-        return {
-            sunrise: new Date(A.Util.formatISOdateString(date, suntimes.rise)),
-            transit: new Date(A.Util.formatISOdateString(date, suntimes.transit)),
-            sunset: new Date(A.Util.formatISOdateString(date, suntimes.set)),
-        }
-    },
+		return {
+			sunrise: new Date(A.Util.formatISOdateString(date, suntimes.rise)),
+			transit: new Date(A.Util.formatISOdateString(date, suntimes.transit)),
+			sunset: new Date(A.Util.formatISOdateString(date, suntimes.set)),
+		}
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Sun Events
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      dawn: date object
-	//       nauticalDawn:  date object
-	//       dawnStart:  date object
-	//       gHourAmStart:  date object
-	//       sunriseStart:  date object
-	//       sunriseEnd:  date object
-	//       gHourAmEnd:  date object
-	//       transit:  date object
-	//       solarNoon:  date object
-	//       gHourPmStart:  date object
-	//       sunsetStart:  date object
-	//       duskStart:  date object
-	//       gHourPmEnd:  date object
-	//       nauticalDusk:  date object
-	//       nightStart:  date object
-	//       nadir:  date object
-	//       nightEnd:  date object
-	//       dayLength:  String in "HH:MM:SS"
-	//       nightLength:  String in "HH:MM:SS"
-    //  }
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Sun Events
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object.
+	//	  integer: Latitude
+	//	  integer: Longitude
+	//	  integer: Optional height above sea level, in meters
+	//
+	//  Returns an object with:
+	//  {
+	//	  dawn: date object
+	//		nauticalDawn:  date object
+	//		dawnStart:  date object
+	//		gHourAmStart:  date object
+	//		sunriseStart:  date object
+	//		sunriseEnd:  date object
+	//		gHourAmEnd:  date object
+	//		transit:  date object
+	//		solarNoon:  date object
+	//		gHourPmStart:  date object
+	//		sunsetStart:  date object
+	//		duskStart:  date object
+	//		gHourPmEnd:  date object
+	//		nauticalDusk:  date object
+	//		nightStart:  date object
+	//		nadir:  date object
+	//		nightEnd:  date object
+	//		dayLength:  String in "HH:MM:SS"
+	//		nightLength:  String in "HH:MM:SS"
+	//	}
+	// -----------------------------------------------------------------------------------
 
-    sunEvents: function(date, lat, lon, h = 0) {
-        let jdo = new A.JulianDay(date); 
-        let coord = A.EclCoord.fromWgs84(lat, lon, h);
-        let suntimes = A.Solar.times(jdo, coord);
-        let daylight = suntimes.set - suntimes.rise
+	sunEvents: function(date, lat, lon, h = 0) {
+		let jdo = new A.JulianDay(date); 
+		let coord = A.EclCoord.fromWgs84(lat, lon, h);
+		let suntimes = A.Solar.times(jdo, coord);
+		let daylight = suntimes.set - suntimes.rise
 		let night = 86400 - daylight
 
 		let events = A.Solar.sunEvents(date, lat, lon, h)
-        // events.sunrise = new Date(A.Util.formatISOdateString(date, suntimes.rise,))
-        // events.sunset = new Date(A.Util.formatISOdateString(date, suntimes.set))
-        events.transit = new Date(A.Util.formatISOdateString(date, suntimes.transit))
-        events.dayLength = A.Coord.secondsToHMSStr(daylight, false)
+		// events.sunrise = new Date(A.Util.formatISOdateString(date, suntimes.rise,))
+		// events.sunset = new Date(A.Util.formatISOdateString(date, suntimes.set))
+		events.transit = new Date(A.Util.formatISOdateString(date, suntimes.transit))
+		events.dayLength = A.Coord.secondsToHMSStr(daylight, false)
 		events.nightLength = A.Coord.secondsToHMSStr(night, false)
 		return events
 	},
 
-    // -----------------------------------------------------------------------------------
-    //  Moon Times
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object.
-    //      integer: Latitude
-    //      integer: Longitude
-    //      integer: Optional height above sea level, in meters
-    //
-    //  Returns an object with:
-    //  {
-    //      moonrise: Sunrise time in Unix
-    //      transit: The length of time the sun is above the horizon, in seconds
-    //      moonset: Sunset time in Unix
-    //  }
-    // -----------------------------------------------------------------------------------
-    moonTimes: function(date, lat, lon, h = 0) {
-        var jdo = new A.JulianDay(date); 
-        var coord = A.EclCoord.fromWgs84(lat, lon, h);
-        var moontimes = A.Moon.times(jdo, coord);
+	// -----------------------------------------------------------------------------------
+	//  Moon Times
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object.
+	//	  integer: Latitude
+	//	  integer: Longitude
+	//	  integer: Optional height above sea level, in meters
+	//
+	//  Returns an object with:
+	//  {
+	//	  moonrise: Sunrise time in Unix
+	//	  transit: The length of time the sun is above the horizon, in seconds
+	//	  moonset: Sunset time in Unix
+	//  }
+	// -----------------------------------------------------------------------------------
+	moonTimes: function(date, lat, lon, h = 0) {
+		var jdo = new A.JulianDay(date); 
+		var coord = A.EclCoord.fromWgs84(lat, lon, h);
+		var moontimes = A.Moon.times(jdo, coord);
 
-        return {
-            moonrise: new Date(A.Util.formatISOdateString(date, moontimes.rise)),
-            transit: new Date(A.Util.formatISOdateString(date, moontimes.transit)),
-            moonset: new Date(A.Util.formatISOdateString(date, moontimes.set)),
-        }
-    },
+		return {
+			moonrise: new Date(A.Util.formatISOdateString(date, moontimes.rise)),
+			transit: new Date(A.Util.formatISOdateString(date, moontimes.transit)),
+			moonset: new Date(A.Util.formatISOdateString(date, moontimes.set)),
+		}
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Summer Solstice
-    //
-    //  Longest day of the year - when the sun is at its most northerly excursion
-    //
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Summer Solstice
+	//
+	//  Longest day of the year - when the sun is at its most northerly excursion
+	//
+	//  Takes one argument:
+	//	  Integer: The year
+	//
+	//  Returns a Javascript date object 
+	// -----------------------------------------------------------------------------------
 
-    summerSolstice: function(year) {
-        return A.JulianDay.jdToDate(A.Solstice.june(year))
-    },
+	summerSolstice: function(year) {
+		return A.JulianDay.jdToDate(A.Solstice.june(year))
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Winter Solstice
-    //
-    //  Shortest day of the year - when the sun is at its most southerly excursion
-    //
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Winter Solstice
+	//
+	//  Shortest day of the year - when the sun is at its most southerly excursion
+	//
+	//  Takes one argument:
+	//	  Integer: The year
+	//
+	//  Returns a Javascript date object 
+	// -----------------------------------------------------------------------------------
 
-    winterSolstice: function(year) {
-        return A.JulianDay.jdToDate(A.Solstice.december(year))
-    },
+	winterSolstice: function(year) {
+		return A.JulianDay.jdToDate(A.Solstice.december(year))
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Vernal Equinox.
-    //
-    //  Spring equinox in March. On the equinox, the day and night are the same length. 
-    //  The time returned indicates the moment when a straight line following the 
-    //  equator travels through the center of the sun.
-    //
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Vernal Equinox.
+	//
+	//  Spring equinox in March. On the equinox, the day and night are the same length. 
+	//  The time returned indicates the moment when a straight line following the 
+	//  equator travels through the center of the sun.
+	//
+	//  Takes one argument:
+	//	  Integer: The year
+	//
+	//  Returns a Javascript date object 
+	// -----------------------------------------------------------------------------------
 
-    vernalEquinox: function(year) {
-        return A.JulianDay.jdToDate(A.Solstice.march(year))
-    },
+	vernalEquinox: function(year) {
+		return A.JulianDay.jdToDate(A.Solstice.march(year))
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Fall Equinox.
-    //
-    //  Fall Equinox in September. On the equinox, the day and night are the same length. 
-    //  The time returned indicates the moment when a straight line following the equator
-    //  travels through the center of the sun.
-    //
-    //  Takes one argument:
-    //      Integer: The year
-    //
-    //  Returns a Javascript date object 
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Fall Equinox.
+	//
+	//  Fall Equinox in September. On the equinox, the day and night are the same length. 
+	//  The time returned indicates the moment when a straight line following the equator
+	//  travels through the center of the sun.
+	//
+	//  Takes one argument:
+	//	  Integer: The year
+	//
+	//  Returns a Javascript date object 
+	// -----------------------------------------------------------------------------------
 
-    fallEquinox: function(year) {
-        return A.JulianDay.jdToDate(A.Solstice.september(year))
-    }
+	fallEquinox: function(year) {
+		return A.JulianDay.jdToDate(A.Solstice.september(year))
+	}
 }
 
 
@@ -438,22 +438,22 @@ A.Get = {
 A.Set = {
 
 	// -----------------------------------------------------------------------------------
-    //  Add a Sun Event
-    //
-    //  This function works in conjuntion with the A.get.sunEvents() function above.
+	//  Add a Sun Event
+	//
+	//  This function works in conjuntion with the A.get.sunEvents() function above.
 	//	It allows custom events to be added to the even array.
 	// 
-	//  	A.Set.sunEvent(-18, 'astronomicalTwighlight' ,'astronomicalDawn')
+	//	A.Set.sunEvent(-18, 'astronomicalTwighlight' ,'astronomicalDawn')
 	// 
-    //  Takes 3 arguments:
-    //      decimal: The solar angle (positive or negative) you wish to key the event with
+	//	Takes 3 arguments:
+	//		decimal: The solar angle (positive or negative) you wish to key the event with
 	//		srtring: The name of the "rise" event
-	// 		string: The name of the "set" event
-    //
-    //  Returns null
-    // -----------------------------------------------------------------------------------
-    sunEvent: function (angle, riseName, setName) {
-        A.sunEventsArray.push([angle, riseName, setName])
+	//		string: The name of the "set" event
+	//
+	//  Returns null
+	// -----------------------------------------------------------------------------------
+	sunEvent: function (angle, riseName, setName) {
+		A.sunEventsArray.push([angle, riseName, setName])
 	},
 }
 
@@ -467,109 +467,109 @@ A.Set = {
 
 A.Util = {
 
-    // -----------------------------------------------------------------------------------
-    //  Format ISO Date String
-    // 
-    //  Takes the following arguments:
-    //      object: A Javascript date object
-    //      number: The hours, minutes, seconds, represented in seconds
-    //
-    //  Returns an integer in degrees
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Format ISO Date String
+	// 
+	//  Takes the following arguments:
+	//	  object: A Javascript date object
+	//	  number: The hours, minutes, seconds, represented in seconds
+	//
+	//  Returns an integer in degrees
+	// -----------------------------------------------------------------------------------
 
-    formatISOdateString: function(date, seconds) {
-        var year = date.getFullYear() 
-        var day = date.getDate()
-        var month = date.getMonth()
-        month = (month == 0) ? 1 : month + 1
-        month = (month < 10) ? '0' + month : month
-        day = (day < 10) ? '0' + day : day
-        return year + '-' + month + '-' + day + 'T' + A.Coord.secondsToHMSStr(seconds, false) + '.000Z'
-    },
+	formatISOdateString: function(date, seconds) {
+		var year = date.getFullYear() 
+		var day = date.getDate()
+		var month = date.getMonth()
+		month = (month == 0) ? 1 : month + 1
+		month = (month < 10) ? '0' + month : month
+		day = (day < 10) ? '0' + day : day
+		return year + '-' + month + '-' + day + 'T' + A.Coord.secondsToHMSStr(seconds, false) + '.000Z'
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Radians To Degrees
-    // 
-    //  Takes the following arguments:
-    //      Integer: The value in radians you wish to convert
-    //      bool: Whether to preserve the sign. i.e. negative radians returns negative degrees
-    //
-    //  Returns an integer in degrees
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Radians To Degrees
+	// 
+	//  Takes the following arguments:
+	//	  Integer: The value in radians you wish to convert
+	//	  bool: Whether to preserve the sign. i.e. negative radians returns negative degrees
+	//
+	//  Returns an integer in degrees
+	// -----------------------------------------------------------------------------------
 
-    radiansToDegrees: function (rad, preserveSign = false) {
-        if (preserveSign == false) {
-            return rad * 180 / Math.PI
-        }
-        let degrees = rad * 180 / Math.PI
-        // If the radians are negative or positive,
-        // the degrees we convert to must match that
-        let negative = (Math.sign(rad) == -1) ? true : false
-        if (negative == true) {
-            if (Math.sign(degrees) == 0) {
-                degrees = degrees * -1
-            }
-        }
-        else {
-            // Is positive
-            if (Math.sign(degrees) == -1) {
-                degrees = degrees * -1
-            }
-        }
-        return degrees
-    },
+	radiansToDegrees: function (rad, preserveSign = false) {
+		if (preserveSign == false) {
+			return rad * 180 / Math.PI
+		}
+		let degrees = rad * 180 / Math.PI
+		// If the radians are negative or positive,
+		// the degrees we convert to must match that
+		let negative = (Math.sign(rad) == -1) ? true : false
+		if (negative == true) {
+			if (Math.sign(degrees) == 0) {
+				degrees = degrees * -1
+			}
+		}
+		else {
+			// Is positive
+			if (Math.sign(degrees) == -1) {
+				degrees = degrees * -1
+			}
+		}
+		return degrees
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Radians To Corrected Degrees
-    // 
-    //  Converts rads to positive degrees, with north at zero
-    //
-    //  Takes the following arguments:
-    //      Integer: The value in radians you wish to convert
-    //      integer: An optional offset in degrees. This value is subtracted
-    //
-    //  Returns an integer in degrees
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Radians To Corrected Degrees
+	// 
+	//  Converts rads to positive degrees, with north at zero
+	//
+	//  Takes the following arguments:
+	//	  Integer: The value in radians you wish to convert
+	//	  integer: An optional offset in degrees. This value is subtracted
+	//
+	//  Returns an integer in degrees
+	// -----------------------------------------------------------------------------------
 
-    radiansToCorrectedDegrees: function(rads, correction = 0) {
-        var degrees = this.radiansToDegrees(rads)
-        degrees = degrees - correction
-        if (degrees < 0) {
-            degrees = degrees + 360
-            if (degrees > 360) {
-                degrees = degress - 360
-            }
-        }
-        return this.invertDegree(degrees)
-    },
+	radiansToCorrectedDegrees: function(rads, correction = 0) {
+		var degrees = this.radiansToDegrees(rads)
+		degrees = degrees - correction
+		if (degrees < 0) {
+			degrees = degrees + 360
+			if (degrees > 360) {
+				degrees = degress - 360
+			}
+		}
+		return this.invertDegree(degrees)
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Invert a degree
-    // 
-    //  In other words, 60˚ becomes 240˚
-    //
-    //  Takes one argument:
-    //      Integer: The value in degrees you wish to flip
-    //
-    //  Returns an integer in degrees
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Invert a degree
+	// 
+	//  In other words, 60˚ becomes 240˚
+	//
+	//  Takes one argument:
+	//	  Integer: The value in degrees you wish to flip
+	//
+	//  Returns an integer in degrees
+	// -----------------------------------------------------------------------------------
 
-    invertDegree: function(deg) {
-        return deg <= 179 ? deg + 180 : deg - 180
-    },
+	invertDegree: function(deg) {
+		return deg <= 179 ? deg + 180 : deg - 180
+	},
 
-    // -----------------------------------------------------------------------------------
-    //  Format number with commas
-    //
-    //  Takes one argument:
-    //      Integer: The value in degrees you wish to format
-    //
-    //  Returns an integer
-    // -----------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------
+	//  Format number with commas
+	//
+	//  Takes one argument:
+	//	  Integer: The value in degrees you wish to format
+	//
+	//  Returns an integer
+	// -----------------------------------------------------------------------------------
 
-    numberWithCommas: function(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+	numberWithCommas: function(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 }
 
 
@@ -703,7 +703,7 @@ A.Coord = {
 	
 		return new A.EclCoord(
 			Math.atan2(sra * cepsilon + (sdec / cdec) * sepsilon, cra), // (13.1) p. 93
-			Math.asin(sdec * cepsilon - cdec * sepsilon * sra)      // (13.2) p. 93
+			Math.asin(sdec * cepsilon - cdec * sepsilon * sra)	  // (13.2) p. 93
 		);
 	},
 	
@@ -761,7 +761,7 @@ A.Coord = {
 	
 		return new A.HzCoord(
 			Math.atan2(sH, cH * slat - (sdec / cdec) * clat),  // (13.5) p. 93
-			Math.asin(slat * sdec + clat * cdec * cH)         // (13.6) p. 93
+			Math.asin(slat * sdec + clat * cdec * cH)		 // (13.6) p. 93
 		);
 	}
 };
@@ -1123,7 +1123,7 @@ A.Interp = {
 	/**
 	 * interpolates for a given interpolating factor n. 
 	 * This is interpolation formula (3.3) 
-     * The interpolation factor n is x-x2 in units of the tabular x interval.
+	 * The interpolation factor n is x-x2 in units of the tabular x interval.
 	 * (See Meeus p. 24.)
 	 *
 	 * @function interpolateN
@@ -1535,7 +1535,7 @@ A.Moon = {
 	 *
 	 * @param {A.JulianDay} jdo - julian day
 	 * @return {Map} eq: the apparent position of the moon as equatorial coordinates 
-	 *               delta: Distance between centers of the Earth and Moon, in km. 
+	 *				delta: Distance between centers of the Earth and Moon, in km. 
 	 */
 	apparentEquatorial: function (jdo) {
 		var moon = A.Moon.geocentricPosition(jdo);
@@ -1564,7 +1564,7 @@ A.Moon = {
 	 * @param {A.EclCoord} eclCoord - geographic location of observer
 	 * @param {?Number} apparent0 - apparent sidereal time at Greenwich for the given JD in radians.
 	 * @return {Map} eq: the corrected apparent position of the moon as equatorial coordinates  
-	 *               delta: Distance between centers of the Earth and Moon, in km. 
+	 *				delta: Distance between centers of the Earth and Moon, in km. 
 	 */
 	apparentTopocentric: function (jdo, eclCoord, apparent0) {
 		var ae = A.Moon.apparentEquatorial(jdo);
@@ -1593,9 +1593,9 @@ A.Moon = {
 	 * @param {A.EclCoord} eclCoord - geographic location of the observer
 	 * @param {boolean} refraction - if true the atmospheric refraction is added to the altitude 
 	 * @return {Map} hz: position of the Moon as horizontal coordinates with azimuth and altitude.
-	 *               eq: position of the Moon as equatorial coordinates
-	 *               delta: Distance between centers of the Earth and Moon, in km.
-	 *               q: parallactic angle in radians 
+	 *				eq: position of the Moon as equatorial coordinates
+	 *				delta: Distance between centers of the Earth and Moon, in km.
+	 *				q: parallactic angle in radians 
 	 */
 	topocentricPosition: function (jdo, eclCoord, refraction) {	
 		var st0 = A.Sidereal.apparentInRa(jdo);
@@ -1607,7 +1607,7 @@ A.Moon = {
 			hz.alt += A.Refraction.bennett2(hz.alt);
 		
 		var H = st0 - (eclCoord.lng + aet.eq.ra);
-        var q = A.Moon.parallacticAngle(eclCoord.lat, H, aet.eq.dec);
+		var q = A.Moon.parallacticAngle(eclCoord.lat, H, aet.eq.dec);
 		return {
 			hz: hz,
 			eq: aet.eq,
@@ -2341,7 +2341,7 @@ A.Parallax = {
 		var sdec = Math.sin(eqcoord.dec);
 		var cdec = Math.cos(eqcoord.dec);
 		return new A.EqCoord(
-			eqcoord.ra + -parallax * latcphi * sH / cdec,         // (40.4) p. 280
+			eqcoord.ra + -parallax * latcphi * sH / cdec,		 // (40.4) p. 280
 			eqcoord.dec + -parallax * (latsphi*cdec - latcphi*cH*sdec) // (40.5) p. 280
 		);
 	}
@@ -2371,7 +2371,7 @@ A.Refraction = {
 	bennett: function (h0)  {
 		if (h0 < 0) // the following formula works for positive altitudes only.
 			h0 = 0; // if h = -0.07679 a div/0 would occur.
-		   
+			
 		// (16.3) p. 106
 		var cRad = Math.PI / 180;
 		var c1 = cRad / 60;
@@ -2382,7 +2382,7 @@ A.Refraction = {
 
 	/**
 	 * Bennett2 returns refraction for obtaining true altitude. 
-     * Similar to Bennett, but a correction is applied to give a more accurate result. 
+	 * Similar to Bennett, but a correction is applied to give a more accurate result. 
 	 * Results are accurate to .015 arc min.  Result unit is radians.
 	 * 
 	 * @function bennett2
@@ -2717,8 +2717,8 @@ A.Sidereal = {
 	 * @return {number} time in radians in the range [0,2*PI)
 	 */
 	apparentInRa: function (jdo) {
-		var s = A.Sidereal._meanInRA(jdo);               // radians of time
-		var n = A.Nutation.nutationInRA(jdo);      // angle (radians) of RA
+		var s = A.Sidereal._meanInRA(jdo);				// radians of time
+		var n = A.Nutation.nutationInRA(jdo);	  // angle (radians) of RA
 		return A.Math.pMod(s + n, 2*Math.PI);
 	},
 
@@ -2733,9 +2733,9 @@ A.Sidereal = {
 	 * @return {number} seconds of time and is in the range [0,86400)
 	 */
 	apparent: function (jdo) {
-		var s = A.Sidereal._mean(jdo);                       // seconds of time
+		var s = A.Sidereal._mean(jdo);						// seconds of time
 		
-		var n = A.Nutation.nutationInRA(jdo);      // angle (radians) of RA
+		var n = A.Nutation.nutationInRA(jdo);	  // angle (radians) of RA
 		var ns = n * 3600 * 180 / Math.PI / 15; // convert RA to time in seconds
 		return A.Math.pMod(s + ns, 86400);
 	},
@@ -2773,12 +2773,12 @@ A.Sidereal = {
 		
 		var cen = (mod[0] - 0.5 - A.J2000) / 36525;
 		var s = A.Math.horner(cen, A.Sidereal.iau82) + mod[1]*1.00273790935*86400;
-		var n = A.Nutation.nutationInRA(new A.JulianDay(modjde[0]));      // angle (radians) of RA
+		var n = A.Nutation.nutationInRA(new A.JulianDay(modjde[0]));	  // angle (radians) of RA
 		var ns = n * 3600 * 180 / Math.PI / 15; // convert RA to time in seconds
 		return A.Math.pMod(s + ns, 86400);
 	}
 };
-    
+	
 // -----------------------------------------------------------------------------------
 //  A.Solar
 //  Methods for calculating the position and times of the sun
@@ -2861,7 +2861,7 @@ A.Solar = {
 	 * @param {A.EclCoord} eclCoord - geographic location of the observer
 	 * @param {boolean} refraction - if true the atmospheric refraction is added to the altitude 
 	 * @return {Map} hz: position of the Sun as horizontal coordinates with azimuth and altitude.
-	 *               eq: position of the Sun as equatorial coordinates
+	 *				eq: position of the Sun as equatorial coordinates
 	 */
 	topocentricPosition: function (jdo, eclCoord, refraction) {	
 		var st0 = A.Sidereal.apparentInRa(jdo);
@@ -3007,8 +3007,8 @@ A.Solar = {
 	 */
 	node: function(T)  {
 		return (125.04 - 1934.136 * T) * Math.PI / 180;
-    },
-    
+	},
+	
 // -----------------------------------------------------------------------------------
 //  The following methods are from SunCalc.js
 // -----------------------------------------------------------------------------------
@@ -3020,13 +3020,13 @@ A.Solar = {
 		var dayMs = 1000 * 60 * 60 * 24
 		return new Date((j + 0.5 - 2440588) * dayMs);
 	},
-	toDays: function(date)   { 
+	toDays: function(date)	{ 
 		return this.toJulian(date) - 2451545;
 	},
 	rightAscension: function(l, b) { 
 		return Math.atan2(Math.sin(l) * Math.cos(((Math.PI / 180) * 23.4397)) - Math.tan(b) * Math.sin(((Math.PI / 180) * 23.4397)), Math.cos(l));
 	},
-	declination: function(l, b)    { 
+	declination: function(l, b)	{ 
 		return Math.asin(Math.sin(b) * Math.cos(((Math.PI / 180) * 23.4397)) + Math.cos(b) * Math.sin(((Math.PI / 180) * 23.4397)) * Math.sin(l));
 	},
 	solarMeanAnomaly: function(d) { 
