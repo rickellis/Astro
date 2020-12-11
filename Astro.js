@@ -87,13 +87,13 @@ A.AU = 149597870
 
 // angle, morning name, evening name
 A.sunEventsArray = [
-	[-0.833,	'sunriseStart',	'sunsetStart'	],
-	[-0.3,		'sunRiseEnd',	'sunSetStart'	],
-	[-12,		'nauticalDawn',	'nauticalDusk'	],
-	[-18,		'nightEnd',		'nightStart'	],
-	[-6, 	 	'dawnStart',	'duskStart'		],
-	[-4,		'gHourAmStart',	'gHourPmEnd'	],
-	[ 6,	 	'gHourAmEnd',	'gHourPmStart'	]
+	[-0.833, 'sunriseStart', 'sunsetStart'   ],
+	[-0.3,   'sunRiseEnd',   'sunSetStart'   ],
+	[-12,    'nauticalDawn', 'nauticalDusk'  ],
+	[-18,    'nightEnd',     'nightStart'    ],
+	[-6,     'dawnStart',    'duskStart'     ],
+	[-4,     'gHourAmStart',  'gHourPmEnd'   ],
+	[ 6,     'gHourAmEnd',    'gHourPmStart' ]
 ]
 
 
