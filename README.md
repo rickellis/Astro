@@ -18,7 +18,7 @@ For example, to get solar position data using MeeusJS requires this:
 
 Using Astro only requires only one function call:
 
-    var sunpos = A.get.sunPosition(new Date, lat, lon)
+    var sunpos = A.Get.sunPosition(new Date, lat, lon)
 
 Astro's methods also provides additional return data types for convenience. For example, solar and lunar azimuth is also available in degrees rather than only radian, so that there is less post-processing necessary for the developer. 
 
@@ -39,7 +39,7 @@ Returns horizontal and equatorial solar coordinates.
     var lon = 34.05361
     var lat = -118.24550
 
-    var sunpos = A.get.sunPosition(new Date, lat, lon)
+    var sunpos = A.Get.sunPosition(new Date, lat, lon)
 
 Takes four arguments:
 
@@ -69,7 +69,7 @@ Returns horizontal and equatorial lunar coordinates, along with delta and parala
     var lon = 34.05361
     var lat = -118.24550
 
-    var moonpos = A.get.moonPosition(new Date, lat, lon)
+    var moonpos = A.Get.moonPosition(new Date, lat, lon)
 
 Takes four arguments:
 
@@ -101,7 +101,7 @@ Distance of the moon in either miles or kilometers.
     var lon = 34.05361
     var lat = -118.24550
 
-    var dist = A.get.lunarDistance(new Date, 2, true)
+    var dist = A.Get.lunarDistance(new Date, 2, true)
 
 Takes the following arguments:
 
@@ -126,7 +126,7 @@ Moon phase and illumination percentage.
     var lon = 34.05361
     var lat = -118.24550
 
-    var illum = A.get.moonIllumination(new Date, lat, lon)
+    var illum = A.Get.moonIllumination(new Date, lat, lon)
 
 
 Takes the following arguments:
@@ -164,7 +164,7 @@ Returns solar sunrise, sunset, and transit times.
     var lon = 34.05361
     var lat = -118.24550
 
-    var times = A.get.sunTimes(new Date, lat, lon)
+    var times = A.Get.sunTimes(new Date, lat, lon)
 
 Takes the following arguments:
 
@@ -184,14 +184,14 @@ Returns an object containing:
 
 ---
 
-### Sun Times All
+### Sun Events
 
-Returns a variety of solar times.
+Similar to the getTimes method abobve, only it returns much more details times.
 
     var lon = 34.05361
     var lat = -118.24550
 
-    var times = A.get.sunTimesAll(new Date, lat, lon)
+    var times = A.Get.sunEvents(new Date, lat, lon)
 
 Takes four arguments:
 
@@ -203,20 +203,42 @@ Takes four arguments:
 Returns an object containing:
 
     {
-        dawn: date object
-        dusk: date object
-        goldenHourAmEnd: date object
-        goldenHourAmStart: date object
-        goldenHourPmEnd: date object
-        goldenHourPmStart: date object
-        nadir: date object
-        solarNoon: date object
-        sunrise: date object
-        sunset: date object
-        transit: date object
-        dayLength: String in "HH:MM:SS"
-        nightLength: String in "HH:MM:SS"
+        nauticalDawn:  date object
+        dawn:  date object
+        goldenAmStart:  date object
+        sunrise:  date object
+        sunriseEnd:  date object
+        goldenAmEnd:  date object
+        transit:  date object
+        solarNoon:  date object
+        goldenPmStart:  date object
+        sunsetStart:  date object
+        sunset:  date object
+        dusk:  date object
+        goldenPmEnd:  date object
+        nauticalDusk:  date object
+        night:  date object
+        nadir:  date object
+        nightEnd:  date object
+        dayLength:  String in "HH:MM:SS"
+        nightLength:  String in "HH:MM:SS"
     }
+
+
+You can add your own custom events using:
+
+    A.Set.sunEvent(decimal, riseName , setName)
+
+Takes 3 arguments:
+
+    decimal: The solar angle (positive or negative) you wish to key the event with
+    srtring: The name of the "rise" event
+    string: The name of the "set" event
+
+
+For example, to add an event that gets the astromomical twighlight and dawn times when the sun is at an angle of -18˚ you would do this:
+
+    A.Set.sunEvent(-18, 'astronomicalTwighlight' ,'astronomicalDawn')
 
 ---
 
@@ -227,7 +249,7 @@ Moonrise, moonset, and transit times.
     var lon = 34.05361
     var lat = -118.24550
 
-    var times = A.get.moonTimes(new Date, lat, lon)
+    var times = A.Get.moonTimes(new Date, lat, lon)
 
 Takes four arguments:
 
@@ -250,7 +272,7 @@ Returns an object containing:
 
 Longest day of the year - when the sun is at its most northerly excursion.
 
-    var s = A.get.summerSolstice(2021)
+    var s = A.Get.summerSolstice(2021)
 
 Takes one argument:
 
@@ -265,7 +287,7 @@ Returns a Javascript date object
 
 Shortest day of the year - when the sun is at its most southerly excursion.
 
-    var s = A.get.winterSolstice(2021)
+    var s = A.Get.winterSolstice(2021)
 
 Takes one argument:
 
@@ -280,7 +302,7 @@ Returns a Javascript date object
 
 Spring equinox in March. On the equinox, the day and night are the same length. The time returned indicates the moment when a straight line following the equator travels through the center of the sun.
 
-    var s = A.get.vernalEquinox(2021)
+    var s = A.Get.vernalEquinox(2021)
 
 Takes one argument:
 
@@ -294,7 +316,7 @@ Returns a Javascript date object
 
 Fall Equinox in September. On the equinox, the day and night are the same length. The time returned indicates the moment when a straight line following the equator travels through the center of the sun.
 
-    var s = A.get.fallEquinox(2021)
+    var s = A.Get.fallEquinox(2021)
 
 Takes one argument:
 
