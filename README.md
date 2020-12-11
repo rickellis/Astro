@@ -242,7 +242,7 @@ For example, to add an event that gets the astromomical twighlight and dawn time
 
 **Default Events** 
 
-These are the events that get compiled by default:
+These are the events/degrees that get compiled by default:
 
     nightEnd:      -18
     nauticalDawn:  -12
