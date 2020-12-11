@@ -41,10 +41,10 @@
 //  there is less post-processing necessary for the developer. 
 // 
 // -----------------------------------------------------------------------------------
-//  Authors	:	Astro	:  Rick Ellis			https://github.com/rickellis/Astro
-//			:	MeeusJS	:  Fabio Soldati		https://github.com/Fabiz/MeeusJs
-//			:	SunCalc	:  Vladimir Agafonkin	https://github.com/mourner/suncalc
-//  License	:	MIT
+//  Authors :  Astro   :  Rick Ellis         https://github.com/rickellis/Astro
+//	        :  MeeusJS :  Fabio Soldati      https://github.com/Fabiz/MeeusJs
+//          :  SunCalc :  Vladimir Agafonkin https://github.com/mourner/suncalc
+//  License :  MIT
 // -----------------------------------------------------------------------------------
 
 
