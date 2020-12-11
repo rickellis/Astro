@@ -3013,7 +3013,6 @@ A.Solar = {
 //  The following methods are from SunCalc.js
 // -----------------------------------------------------------------------------------
 
-
 	toJulian: function(date) { 
 		return date.valueOf() / 86400000 - 0.5 + 2440588;
 	},
@@ -3069,10 +3068,18 @@ A.Solar = {
 	  }
 	},
 	
-	// Use this function to add custom time event
-    addSunEvent: function (angle, riseName, setName) {
-        A.sunEventsArray.push([angle, riseName, setName])
-	},
+	/**
+	 * sunEvents returns an object with sun event times
+	 * 
+	 * @function sunEvents
+	 * @static
+	 *
+	 * @param {object} date object
+	 * @param {number} latitude
+	 * @param {number} longitude
+	 * @param {number} optional elevation in meters
+	 * @return {object} 
+	 */	
 	sunEvents: function(date, lat, lng, height = 0) {
 		var i
 		var len
