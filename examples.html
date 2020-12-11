@@ -13,47 +13,62 @@
 		var lat = 34.05361
 		var lon = -118.24550
 
-		var sunpos = A.get.sunPosition(new Date, lat, lon)
+		var sunpos = A.Get.sunPosition(new Date, lat, lon)
 		console.log('Sun Position')
 		console.log(sunpos)
+		console.log(' ')
 
-		var moonpos = A.get.moonPosition(new Date, lat, lon)
+		var moonpos = A.Get.moonPosition(new Date, lat, lon)
 		console.log('Moon Position')
 		console.log(moonpos)
+		console.log(' ')
 
-		var distance = A.get.lunarDistance(new Date, 1, true)
+		var distance = A.Get.lunarDistance(new Date, 1, true)
 		console.log('Moon Distance')
 		console.log(distance)
+		console.log(' ')
 
-		var illum = A.get.moonIllumination(new Date, lat, lon)
+		var illum = A.Get.moonIllumination(new Date, lat, lon)
 		console.log('Moon Illumination')
 		console.log(illum)
+		console.log(' ')
 
-		var times = A.get.sunTimes(new Date, lat, lon)
+		var times = A.Get.sunTimes(new Date, lat, lon)
 		console.log('Sun Times')
 		console.log(times)
+		console.log(' ')
 
-		var timesAll = A.get.sunTimesAll(new Date(), lat, lon)
-		console.log('Sun Times All')
+		A.Set.sunEvent(-18, 'astronomicalTwighlight' ,'astronomicalDawn')
+		console.log('Custom Sun Event Added')
+		console.log("-18, 'astronomicalTwighlight' ,'astronomicalDawn'")
+		console.log(' ')
+
+		var timesAll = A.Get.sunEvents(new Date(), lat, lon)
+		console.log('Sun Events')
 		console.log(timesAll)
+		console.log(' ')
 
-		var moontimes = A.get.moonTimes(new Date, lat, lon)
+		var moontimes = A.Get.moonTimes(new Date, lat, lon)
 		console.log('Moon Times')
 		console.log(moontimes)
+		console.log(' ')
 
-		var ss = A.get.summerSolstice(2021)
+		var ss = A.Get.summerSolstice(2021)
 		console.log('Summer Solstice')
 		console.log(ss)
+		console.log(' ')
 
-		var ws = A.get.winterSolstice(2021)
+		var ws = A.Get.winterSolstice(2021)
 		console.log('Winter Solstice')
 		console.log(ws)
+		console.log(' ')
 
-		var ve = A.get.vernalEquinox(2021)
+		var ve = A.Get.vernalEquinox(2021)
 		console.log('Vernal Equinox')
 		console.log(ve)
+		console.log(' ')
 
-		var fe = A.get.fallEquinox(2021)
+		var fe = A.Get.fallEquinox(2021)
 		console.log('Fall Equinox')
 		console.log(fe)
 
