@@ -182,6 +182,7 @@ Takes the following arguments:
     object: A Javascript date object.
 
 Returns an object with:
+
     {
         rightAscension: right ascension in radians
         declination: declination in rads
