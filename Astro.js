@@ -249,8 +249,7 @@ A.Get = {
         var moontp = A.Moon.topocentricPosition(jdo, coord, true);
         var angle = A.MoonIllum.phaseAngleEq2(moontp.eq, suntp.eq);
 		var illum = A.MoonIllum.illuminated(angle);
-		var phase = illum * 10
-		// var phase = 1 - (angle / 10) * .5
+		var phase = 1 - (angle / 10) * .5
 
         return {
             phaseAngle: angle,
