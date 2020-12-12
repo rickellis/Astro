@@ -18,21 +18,21 @@
 //  Why the fork?
 // 
 //  I was creating a Hologram widget that displays solar and lunar informaiton. I tested 
-//  a few libraries and found limitations in each one, so I ended up using both MeeusJS 
-//  and SunCalc together and writing additional functions. It worked, but it wasn't the 
-//  cleanest approach.
+//  a few libraries and wasn't able to find a single one that met all my needs, so I ended 
+//  up using both MeeusJS and SunCalc together and writing additional functions.
+//  It worked, but it wasn't the cleanest approach.
 //  
 //  I had two goals for Asto. First, I wanted a complete library that had all the commonly
 //	neneded solar and lunar calculations. The second goal was a library with very simple 
 //  interfaces for fast development. 
 //  
-//  For example, to get solar position data using MeeusJS requires this:
+//  For example, to get solar position data using MeeusJS requires several function calls:
 // 
 //	  var jdo = new A.JulianDay(new Date())
 //	  var coord = A.EclCoord.fromWgs84(lat, lon)
 //	  var tp = A.Solar.topocentricPosition(jdo, coord, true)
 // 
-//  Using Astro only requires only one function call:
+//  Using Astro only requires only one function:
 // 
 //	  var sunpos = A.get.sunPosition(new Date, lat, lon)
 // 
