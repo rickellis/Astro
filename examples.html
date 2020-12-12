@@ -28,9 +28,14 @@
 		console.log(distance)
 		console.log(' ')
 
-		var illum = A.Get.moonIllumination(new Date, lat, lon)
+		var illum = A.Get.moonIllumination(new Date)
 		console.log('Moon Illumination')
 		console.log(illum)
+		console.log(' ')
+
+		var coord = A.Get.moonCoordinates(new Date)
+		console.log('Moon Coordinates')
+		console.log(coord)
 		console.log(' ')
 
 		var times = A.Get.sunTimes(new Date, lat, lon)

@@ -151,8 +151,9 @@ Takes the following arguments:
 Returns an object containing:
 
     {
-        phaseAngle: The illuminated fraction of the moon in radians
-        illumination: The percentage of the illuminated area of the disk
+        phase: The illuminated fraction of the moon in radians
+        fraction: The percentage of the illuminated area of the disk as as fraction
+        illumination: The percentage of illumination (fraction * 100)
         phase: moon phase as a number between 0 and 1. See below for meaning:
     }
 
@@ -170,7 +171,21 @@ Returns an object containing:
 | 0.75     | Last Quarter |
 | 0.875    | Waning Crescent |
 
+---
 
+**Moon Coordinates**
+
+    var coord = A.Get.moonCoordinates(date)
+	
+Takes the following arguments:
+    object: A Javascript date object.
+
+Returns an object with:
+    {
+        rightAscension: right ascension in radians
+        declination: declination in rads
+        distance: in kilometers
+    }
 
 ---
 
