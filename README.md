@@ -25,7 +25,7 @@ Using Astro only requires only one function call:
 
     var sunpos = A.Get.sunPosition(new Date, lat, lon)
 
-All the original MeeusJS function are all available in Astro if you need to solve specific problems, but for the more commonly needed routines I find a single entry point is faster and cleaner.
+All the original MeeusJS function are available in Astro if you need to solve specific problems, but for the more commonly needed routines I find a single entry point is faster and cleaner.
 
 Astro's methods also provide additional return data types for convenience. For example, solar and lunar azimuth is also available in degrees rather than only radians, so that there is less post-processing necessary for the developer. 
 
