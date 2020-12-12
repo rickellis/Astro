@@ -87,13 +87,13 @@ A.AU = 149597870
 
 // angle, morning name, evening name
 A.sunEventsArray = [
-	[-0.833, 'sunriseStart', 'sunsetStart'   ],
-	[-0.3,   'sunRiseEnd',   'sunSetStart'   ],
-	[-12,    'nauticalDawn', 'nauticalDusk'  ],
-	[-18,    'nightEnd',     'nightStart'    ],
-	[-6,     'dawnStart',    'duskStart'     ],
-	[-4,     'gHourAmStart',  'gHourPmEnd'   ],
-	[ 6,     'gHourAmEnd',    'gHourPmStart' ]
+	[-0.833, 'sunriseStart', 		'sunsetStart'   ],
+	[-0.3,   'sunRiseEnd',   		'sunSetStart'   ],
+	[-12,    'nauticalDawn', 		'nauticalDusk'  ],
+	[-18,    'nightEnd',     		'nightStart'    ],
+	[-6,     'dawnStart',    		'duskStart'     ],
+	[-4,     'goldenHourAmStart',	'goldenHourPmEnd'   ],
+	[ 6,     'goldenHourAmEnd',    	'goldenHourPmStart' ]
 ]
 
 
@@ -301,16 +301,16 @@ A.Get = {
 	//	  dawn: date object
 	//		nauticalDawn:  date object
 	//		dawnStart:  date object
-	//		gHourAmStart:  date object
+	//		goldenHourAmStart:  date object
 	//		sunriseStart:  date object
 	//		sunriseEnd:  date object
-	//		gHourAmEnd:  date object
+	//		goldenHourAmEnd:  date object
 	//		transit:  date object
 	//		solarNoon:  date object
-	//		gHourPmStart:  date object
+	//		goldenHourPmStart:  date object
 	//		sunsetStart:  date object
 	//		duskStart:  date object
-	//		gHourPmEnd:  date object
+	//		goldenHourPmEnd:  date object
 	//		nauticalDusk:  date object
 	//		nightStart:  date object
 	//		nadir:  date object
