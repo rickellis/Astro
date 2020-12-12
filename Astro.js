@@ -6,7 +6,7 @@
 // 
 //    Astronomical Calculation Library
 // -----------------------------------------------------------------------------------
-//    VERSION 1.0.0
+//    VERSION 1.0.1
 // -----------------------------------------------------------------------------------
 // 
 //  Solar and Lunar Astronomical Calculation Library written in Javascript
