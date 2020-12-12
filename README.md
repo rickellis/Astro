@@ -2,7 +2,7 @@
 
 Solar and Lunar Astronomical Calculation Library written in Javascript
 
-Astro is a fork of Fabio Soldati's excellent [MeeusJS](https://github.com/Fabiz/MeeusJs) library. It also contains one major function from the [SunCalc](https://github.com/mourner/suncalc) library by Vladimir Agafonkin. I added some new interfaces and utility functions to the library.
+Astro is a fork of Fabio Soldati's excellent [MeeusJS](https://github.com/Fabiz/MeeusJs) library. It also contains some components from the [SunCalc](https://github.com/mourner/suncalc) library by Vladimir Agafonkin. I added some new interfaces and utility functions to the library.
 
 Why the fork?
 
