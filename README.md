@@ -261,23 +261,23 @@ For example, to add an event that gets the astromomical dusk and dawn times when
 
 These are the events/degrees that get compiled by default.
 
-    nightEnd:      -18
-    nauticalDawn:  -12
-    dawnStart:     -6
-    goldenHourAmStart:  -4
-    sunriseStart:  -0.833
-    sunriseEnd:    -0.3
-    goldenHourAmEnd:     6
+    nightEnd:       -18
+    nauticalDawn:   -12
+    dawnStart:      -6
+    goldenHourAmStart: -4
+    sunriseStart:   -0.833
+    sunriseEnd:     -0.3
+    goldenHourAmEnd: 6
 
     ..... Daytime ......
 
-    goldenHourPmStart:   6
-    sunsetStart:   -0.3
-    sunsetStart:   -0.833 
-    duskStart:     -6
-    goldenHourPmEnd:    -4
-    nauticalDusk:  -12
-    nightStart:    -18
+    goldenHourPmStart: 6
+    sunsetStart:    -0.3
+    sunsetStart:    -0.833 
+    duskStart:      -6
+    goldenHourPmEnd: -4
+    nauticalDusk:   -12
+    nightStart:     -18
 
 ---
 
