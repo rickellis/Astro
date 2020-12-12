@@ -158,14 +158,19 @@ Returns an object containing:
 
 **Moon phases**
 
-    0.0 = New Moon
-    0.125 = Waxing Crescent
-    0.25 = First Quarter
-    0.375 = Waxing Gibbous
-    0.5	= Full Moon
-    62.5 = Waning Gibbous
-    0.75 = Last Quarter
-    0.875 = Waning Crescent
+
+| Phase      | Name |
+| ----------- | ----------- |
+| 0.0      | New Moon      |
+| 0.125    | Waxing Crescent |
+| 0.25     | First Quarter |
+| 0.375    | Waxing Gibbous |
+| 0.5      | Full Moon |
+| 0.625    | Waning Gibbous |
+| 0.75     | Last Quarter |
+| 0.875    | Waning Crescent |
+
+
 
 ---
 
