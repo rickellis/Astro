@@ -243,19 +243,20 @@ A.Get = {
 	// -----------------------------------------------------------------------------------
 
 	moonIllumination: function(date, lat, lon, h = 0) {
-		var jdo = new A.JulianDay(date); 
-		var coord = A.EclCoord.fromWgs84(lat, lon, h);
-		var suntp = A.Solar.topocentricPosition(jdo, coord, true);
-		var moontp = A.Moon.topocentricPosition(jdo, coord, true);
-		var angle = A.MoonIllum.phaseAngleEq2(moontp.eq, suntp.eq);
+        var jdo = new A.JulianDay(date); 
+        var coord = A.EclCoord.fromWgs84(lat, lon, h);
+        var suntp = A.Solar.topocentricPosition(jdo, coord, true);
+        var moontp = A.Moon.topocentricPosition(jdo, coord, true);
+        var angle = A.MoonIllum.phaseAngleEq2(moontp.eq, suntp.eq);
 		var illum = A.MoonIllum.illuminated(angle);
-        var phase = 1 - (angle / 10) * .5
+		var phase = illum * 10
+		// var phase = 1 - (angle / 10) * .5
 
-		return {
-			phaseAngle: angle,
-			illumination: illum,
-			phase: phase
-		}
+        return {
+            phaseAngle: angle,
+            illumination: illum,
+            phase: phase,
+        }
 	},
 
 	// -----------------------------------------------------------------------------------
