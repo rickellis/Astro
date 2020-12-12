@@ -253,9 +253,9 @@ Takes 3 arguments:
     string: The name of the "set" event
 
 
-For example, to add an event that gets the astromomical twighlight and dawn times when the sun is at an angle of -18˚ you would do this:
+For example, to add an event that gets the astromomical dusk and dawn times when the sun is at an angle of -18˚ you would do this:
 
-    A.Set.sunEvent(-18, 'astronomicalTwighlight' ,'astronomicalDawn')
+    A.Set.sunEvent(-18, 'astronomicalDusk' ,'astronomicalDawn')
 
 **Default Events** 
 
