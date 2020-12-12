@@ -173,7 +173,8 @@ Returns an object containing:
 
 ---
 
-**Moon Coordinates**
+
+### Moon Coordinates
 
     var coord = A.Get.moonCoordinates(date)
 	
