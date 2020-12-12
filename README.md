@@ -203,7 +203,7 @@ Returns an object containing:
 
 ### Sun Events
 
-Similar to the `A.Get.sunTimes()` method described above, only it returns a larger set of event time.
+Similar to the `A.Get.sunTimes()` method described above, only it returns a larger set of event time. This routine was taken from SunCalc.
 
     var lon = 34.05361
     var lat = -118.24550
