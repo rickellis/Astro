@@ -178,7 +178,7 @@ Returns an object containing:
 
     var coord = A.Get.moonCoordinates(date)
 	
-Takes the following arguments:
+Takes the following argument:
 
     object: A Javascript date object.
 
