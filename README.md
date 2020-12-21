@@ -31,7 +31,7 @@ Astro's methods also provide additional return data types for convenience. For e
 
 Note: For consistency, I adopted the design architecture of MeeusJS, and converted the SunCalc code to that pattern. Had I been starting from scratch I might have chosen a little newer architecture, but it works fine. Essentially, the entire library is one Super Object, with child objects for each category of data manipulation. That means function calls follow this pattern:
 
-A.ChildObject.function()
+    A.ChildObject.function()
 
 Enjoy!
 
