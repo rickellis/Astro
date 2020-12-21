@@ -6,9 +6,9 @@ Astro is a fork of Fabio Soldati's excellent [MeeusJS](https://github.com/Fabiz/
 
 Why the fork?
 
-I was creating a [Hologram](https://gethologram.com/widgets/orbitron-5000) widget that displays solar and lunar informaiton. I tested a few libraries and wasn't able to find a single one that met all my needs, so I ended up using both MeeusJS and SunCalc together and writing some additional functions. It worked, but it wasn't the cleanest approach.
+I was creating a [Hologram](https://gethologram.com/widgets/orbitron-5000) widget that displays solar and lunar informaiton. I tested a few libraries and wasn't able to find one that met all my needs, so I ended up using both MeeusJS and SunCalc together and writing some additional functions. It worked, but it wasn't the cleanest approach.
 
-I had two goals for Astro. First, I wanted a complete library that had all the commonly neneded solar and lunar calculations. The second goal was a library with very simple interfaces for fast development. 
+I had two goals for Astro. First, I wanted a complete library that had all the commonly needed solar and lunar calculations. The second goal was a library with very simple interfaces for fast development. 
 
 For example, to get solar position data using MeeusJS requires three function calls:
 
