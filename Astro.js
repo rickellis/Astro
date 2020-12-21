@@ -18,12 +18,12 @@
 //  Why the fork?
 // 
 //  I was creating a Hologram widget that displays solar and lunar informaiton. I tested 
-//  a few libraries and wasn't able to find a single one that met all my needs, so I ended 
+//  a few libraries and wasn't able to find one that met all my needs, so I ended 
 //  up using both MeeusJS and SunCalc together and writing additional functions.
 //  It worked, but it wasn't the cleanest approach.
 //  
 //  I had two goals for Asto. First, I wanted a complete library that had all the commonly
-//	neneded solar and lunar calculations. The second goal was a library with very simple 
+//	needed solar and lunar calculations. The second goal was a library with very simple 
 //  interfaces for fast development. 
 //  
 //  For example, to get solar position data using MeeusJS requires several function calls:
