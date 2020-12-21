@@ -21,7 +21,7 @@ For example, to get solar position data using MeeusJS requires three function ca
     // Get the tropocentric position
     var tp = A.Solar.topocentricPosition(jdo, coord, true)
 
-Using Astro only requires only one function call:
+Using Astro requires only one function call:
 
     var sunpos = A.Get.sunPosition(new Date, lat, lon)
 
