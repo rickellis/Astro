@@ -8,7 +8,7 @@ Why the fork?
 
 I was creating a [Hologram](https://gethologram.com/widgets/orbitron-5000) widget that displays solar and lunar informaiton. I tested a few libraries and wasn't able to find one that met all my needs, so I ended up using both MeeusJS and SunCalc together and writing some additional functions. It worked, but it wasn't the cleanest approach.
 
-I had two goals for Astro. First, I wanted a complete library that had all the commonly needed solar and lunar calculations. The second goal was a library with very simple interfaces for fast development. 
+I had two goals for Astro. First, I wanted a complete library that had all the commonly needed solar and lunar calculations. The second goal was a library with very simple interfaces for fast development.
 
 For example, to get solar position data using MeeusJS requires three function calls:
 
@@ -27,7 +27,7 @@ Using Astro requires only one function call:
 
 All the original MeeusJS function are available in Astro if you need to solve specific problems, but for the more commonly needed routines I find a single entry point is faster and cleaner.
 
-Astro's methods also provide additional return data types for convenience. For example, solar and lunar azimuth is also available in degrees rather than only radians, so that there is less post-processing necessary for the developer. 
+Astro's methods also provide additional return data types for convenience. For example, solar and lunar azimuth is also available in degrees rather than only radians, so that there is less post-processing necessary for the developer.
 
 Note: For consistency, I adopted the design architecture of MeeusJS, and converted the SunCalc code to that pattern. Had I been starting from scratch I might have chosen a little newer architecture, but it works fine. Essentially, the entire library is one Super Object, with child objects for each category of data manipulation. That means function calls follow this pattern:
 
@@ -41,7 +41,7 @@ Enjoy!
 
 The [examples.html](https://github.com/rickellis/Astro/blob/main/examples.html) file will let you run all the below functions.
 
-----
+---
 
 ### Sun Position
 
@@ -59,7 +59,6 @@ Takes four arguments:
     integer: Latitude
     integer: Longitude
     integer: Optional height above sea level, in meters
-
 
 Returns an object containing:
 
@@ -100,9 +99,8 @@ Returns an object with:
         ascension: Right ascension in radians
         declination: Declination in radians
         delta: Distance between centers of the Earth and Moon, in km
-        paralacticAngle: In radians 
+        paralacticAngle: In radians
     }
-
 
 ---
 
@@ -130,7 +128,6 @@ Returns an object with:
 
 ---
 
-
 ### Moon Illumination
 
 Moon phase and illumination percentage.
@@ -139,7 +136,6 @@ Moon phase and illumination percentage.
     var lat = -118.24550
 
     var illum = A.Get.moonIllumination(new Date, lat, lon)
-
 
 Takes the following arguments:
 
@@ -159,25 +155,23 @@ Returns an object containing:
 
 **Moon phases**
 
-
-| Phase      | Name |
-| ----------- | ----------- |
-| 0.0      | New Moon      |
-| 0.125    | Waxing Crescent |
-| 0.25     | First Quarter |
-| 0.375    | Waxing Gibbous |
-| 0.5      | Full Moon |
-| 0.625    | Waning Gibbous |
-| 0.75     | Last Quarter |
-| 0.875    | Waning Crescent |
+| Phase | Name            |
+| ----- | --------------- |
+| 0.0   | New Moon        |
+| 0.125 | Waxing Crescent |
+| 0.25  | First Quarter   |
+| 0.375 | Waxing Gibbous  |
+| 0.5   | Full Moon       |
+| 0.625 | Waning Gibbous  |
+| 0.75  | Last Quarter    |
+| 0.875 | Waning Crescent |
 
 ---
-
 
 ### Moon Coordinates
 
     var coord = A.Get.moonCoordinates(date)
-	
+
 Takes the following argument:
 
     object: A Javascript date object.
@@ -215,7 +209,6 @@ Returns an object containing:
         transit: The length of time the sun is above the horizon, in seconds
         sunset: Sunset time in Unix
     }
-
 
 ---
 
@@ -259,7 +252,6 @@ Returns an object containing:
         nightLength:  String in "HH:MM:SS"
     }
 
-
 You can add your own custom events using:
 
     A.Set.sunEvent(decimal, riseName , setName)
@@ -270,12 +262,11 @@ Takes 3 arguments:
     srtring: The name of the "rise" event
     string: The name of the "set" event
 
-
 For example, to add an event that gets the astromomical dusk and dawn times when the sun is at an angle of -18˚ you would do this:
 
     A.Set.sunEvent(-18, 'astronomicalDusk' ,'astronomicalDawn')
 
-**Default Events** 
+**Default Events**
 
 These are the events/degrees that get compiled by default.
 
@@ -291,7 +282,7 @@ These are the events/degrees that get compiled by default.
 
     goldenHourPmStart: 6
     sunsetStart:    -0.3
-    sunsetStart:    -0.833 
+    sunsetStart:    -0.833
     duskStart:      -6
     goldenHourPmEnd: -4
     nauticalDusk:   -12
@@ -335,10 +326,9 @@ Takes one argument:
 
     Integer: The year
 
-Returns a Javascript date object 
+Returns a Javascript date object
 
-----
-
+---
 
 ### Winter Solstice
 
@@ -350,10 +340,9 @@ Takes one argument:
 
     Integer: The year
 
-Returns a Javascript date object 
+Returns a Javascript date object
 
-----
-
+---
 
 ### Vernal Equinox
 
@@ -365,9 +354,9 @@ Takes one argument:
 
     Integer: The year
 
-Returns a Javascript date object 
+Returns a Javascript date object
 
-----
+---
 
 ### Fall Equinox
 
@@ -379,9 +368,9 @@ Takes one argument:
 
     Integer: The year
 
-Returns a Javascript date object 
+Returns a Javascript date object
 
-----
+---
 
 ### Radians To Degrees
 
@@ -416,7 +405,7 @@ Returns an integer in degrees
 
     var n = A.Util.numberWithCommas(456254256)
 
- Becomes 456,254,256
+Becomes 456,254,256
 
 Takes one argument:
 
@@ -425,11 +414,6 @@ Takes one argument:
 Returns a number
 
 ---
-
-
-
-
-
 
 ## License
 
